@@ -1,14 +1,14 @@
 //
-//  ViewController.swift
-//  BoredBeGone
+//  FavoritesViewController.swift
+//  Eventor
 //
-//  Created by Justin Snider on 2/11/19.
+//  Created by Justin Snider on 2/12/19.
 //  Copyright © 2019 Justin Snider. All rights reserved.
 //
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class FavoritesViewController: UIViewController {
     
     //========================================
     //MARK: - Life Cycle Methods
@@ -18,6 +18,4 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
     }
 
-
 }
-

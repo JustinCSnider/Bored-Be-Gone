@@ -14,6 +14,10 @@
 		CC017BCE2211DFB10036ADAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC017BCC2211DFB10036ADAC /* LaunchScreen.storyboard */; };
 		CC017BDA2211E4240036ADAC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC017BD82211E4240036ADAC /* Model.xcdatamodeld */; };
 		CC017BDC2211E4390036ADAC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC017BDB2211E4390036ADAC /* CoreDataStack.swift */; };
+		CC9F4E16221333D700A39EEF /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E15221333D700A39EEF /* FiltersViewController.swift */; };
+		CC9F4E18221333F400A39EEF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E17221333F400A39EEF /* FavoritesViewController.swift */; };
+		CC9F4E1A2213350100A39EEF /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E192213350100A39EEF /* NetworkController.swift */; };
+		CC9F4E1C2213352300A39EEF /* EventorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E1B2213352300A39EEF /* EventorController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +30,10 @@
 		CC017BCF2211DFB10036ADAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC017BD92211E4240036ADAC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CC017BDB2211E4390036ADAC /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CC9F4E15221333D700A39EEF /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
+		CC9F4E17221333F400A39EEF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		CC9F4E192213350100A39EEF /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
+		CC9F4E1B2213352300A39EEF /* EventorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventorController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +80,10 @@
 			isa = PBXGroup;
 			children = (
 				CC017BC52211DFB00036ADAC /* HomeViewController.swift */,
+				CC9F4E15221333D700A39EEF /* FiltersViewController.swift */,
+				CC9F4E17221333F400A39EEF /* FavoritesViewController.swift */,
+				CC9F4E192213350100A39EEF /* NetworkController.swift */,
+				CC9F4E1B2213352300A39EEF /* EventorController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -166,9 +178,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC017BDC2211E4390036ADAC /* CoreDataStack.swift in Sources */,
+				CC9F4E1C2213352300A39EEF /* EventorController.swift in Sources */,
 				CC017BC62211DFB00036ADAC /* HomeViewController.swift in Sources */,
 				CC017BC42211DFB00036ADAC /* AppDelegate.swift in Sources */,
 				CC017BDA2211E4240036ADAC /* Model.xcdatamodeld in Sources */,
+				CC9F4E18221333F400A39EEF /* FavoritesViewController.swift in Sources */,
+				CC9F4E1A2213350100A39EEF /* NetworkController.swift in Sources */,
+				CC9F4E16221333D700A39EEF /* FiltersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
