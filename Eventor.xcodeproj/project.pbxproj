@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CC017BC02211DFB00036ADAC /* BoredBeGone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoredBeGone.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC017BC02211DFB00036ADAC /* Eventor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eventor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC017BC32211DFB00036ADAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CC017BC52211DFB00036ADAC /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CC017BC82211DFB00036ADAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		CC017BB72211DFB00036ADAC = {
 			isa = PBXGroup;
 			children = (
-				CC017BC22211DFB00036ADAC /* BoredBeGone */,
+				CC017BC22211DFB00036ADAC /* Eventor */,
 				CC017BC12211DFB00036ADAC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -50,12 +50,12 @@
 		CC017BC12211DFB00036ADAC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CC017BC02211DFB00036ADAC /* BoredBeGone.app */,
+				CC017BC02211DFB00036ADAC /* Eventor.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CC017BC22211DFB00036ADAC /* BoredBeGone */ = {
+		CC017BC22211DFB00036ADAC /* Eventor */ = {
 			isa = PBXGroup;
 			children = (
 				CC017BD72211E3CB0036ADAC /* Views and Assets */,
@@ -65,7 +65,7 @@
 				CC017BCF2211DFB10036ADAC /* Info.plist */,
 				CC017BDB2211E4390036ADAC /* CoreDataStack.swift */,
 			);
-			path = BoredBeGone;
+			path = Eventor;
 			sourceTree = "<group>";
 		};
 		CC017BD52211E3A10036ADAC /* Controllers */ = {
@@ -97,9 +97,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CC017BBF2211DFB00036ADAC /* BoredBeGone */ = {
+		CC017BBF2211DFB00036ADAC /* Eventor */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CC017BD22211DFB10036ADAC /* Build configuration list for PBXNativeTarget "BoredBeGone" */;
+			buildConfigurationList = CC017BD22211DFB10036ADAC /* Build configuration list for PBXNativeTarget "Eventor" */;
 			buildPhases = (
 				CC017BBC2211DFB00036ADAC /* Sources */,
 				CC017BBD2211DFB00036ADAC /* Frameworks */,
@@ -109,9 +109,9 @@
 			);
 			dependencies = (
 			);
-			name = BoredBeGone;
+			name = Eventor;
 			productName = BoredBeGone;
-			productReference = CC017BC02211DFB00036ADAC /* BoredBeGone.app */;
+			productReference = CC017BC02211DFB00036ADAC /* Eventor.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -129,7 +129,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CC017BBB2211DFB00036ADAC /* Build configuration list for PBXProject "BoredBeGone" */;
+			buildConfigurationList = CC017BBB2211DFB00036ADAC /* Build configuration list for PBXProject "Eventor" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -142,7 +142,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CC017BBF2211DFB00036ADAC /* BoredBeGone */,
+				CC017BBF2211DFB00036ADAC /* Eventor */,
 			);
 		};
 /* End PBXProject section */
@@ -315,12 +315,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BoredBeGone/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Eventor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.BoredBeGone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.Eventor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -332,12 +332,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = BoredBeGone/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Eventor/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.BoredBeGone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.Eventor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -347,7 +347,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CC017BBB2211DFB00036ADAC /* Build configuration list for PBXProject "BoredBeGone" */ = {
+		CC017BBB2211DFB00036ADAC /* Build configuration list for PBXProject "Eventor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CC017BD02211DFB10036ADAC /* Debug */,
@@ -356,7 +356,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CC017BD22211DFB10036ADAC /* Build configuration list for PBXNativeTarget "BoredBeGone" */ = {
+		CC017BD22211DFB10036ADAC /* Build configuration list for PBXNativeTarget "Eventor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CC017BD32211DFB10036ADAC /* Debug */,
