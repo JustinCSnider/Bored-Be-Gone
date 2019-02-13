@@ -18,6 +18,7 @@
 		CC9F4E18221333F400A39EEF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E17221333F400A39EEF /* FavoritesViewController.swift */; };
 		CC9F4E1A2213350100A39EEF /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E192213350100A39EEF /* NetworkController.swift */; };
 		CC9F4E1C2213352300A39EEF /* EventorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E1B2213352300A39EEF /* EventorController.swift */; };
+		CCF3136D221488400097115E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3136C221488400097115E /* Event.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		CC9F4E17221333F400A39EEF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		CC9F4E192213350100A39EEF /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		CC9F4E1B2213352300A39EEF /* EventorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventorController.swift; sourceTree = "<group>"; };
+		CCF3136C221488400097115E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				CC017BD82211E4240036ADAC /* Model.xcdatamodeld */,
+				CCF3136C221488400097115E /* Event.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CC017BDC2211E4390036ADAC /* CoreDataStack.swift in Sources */,
+				CCF3136D221488400097115E /* Event.swift in Sources */,
 				CC9F4E1C2213352300A39EEF /* EventorController.swift in Sources */,
 				CC017BC62211DFB00036ADAC /* HomeViewController.swift in Sources */,
 				CC017BC42211DFB00036ADAC /* AppDelegate.swift in Sources */,
