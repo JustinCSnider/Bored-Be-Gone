@@ -16,6 +16,7 @@ class HomeViewController: UIViewController {
     
     @IBOutlet weak var eventView: EventView!
     @IBOutlet weak var eventTitleLabel: UILabel!
+    @IBOutlet weak var eventDescriptionLabel: UILabel!
     
     //========================================
     //MARK: - Life Cycle Methods
@@ -28,12 +29,12 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        //Setting up a bottom border for the event title
         if eventTitleLabel.layer.sublayers == nil {
             eventTitleLabel.addBorder(side: .Bottom, thickness: 2, color: UIColor.black)
         }
     }
-
-
 }
 
 extension UILabel {

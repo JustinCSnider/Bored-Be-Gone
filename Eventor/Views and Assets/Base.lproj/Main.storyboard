@@ -35,15 +35,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBQ-9p-Pvb" customClass="EventView" customModule="Eventor" customModuleProvider="target">
-                                <rect key="frame" x="67.5" y="269.5" width="240" height="128"/>
+                                <rect key="frame" x="67.5" y="246" width="240" height="175"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-yy-7GO">
-                                        <rect key="frame" x="8" y="62.5" width="222" height="60.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-yy-7GO">
+                                        <rect key="frame" x="8" y="62.5" width="222" height="107.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="My First Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnu-t4-DRP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="My First Event" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnu-t4-DRP">
                                         <rect key="frame" x="8" y="0.0" width="222" height="62.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="52"/>
                                         <nil key="textColor"/>
@@ -55,7 +55,7 @@
                                     <constraint firstItem="5zJ-yy-7GO" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="DEY-fW-uqT"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="Hk9-Sx-Fhq"/>
                                     <constraint firstAttribute="trailing" secondItem="5zJ-yy-7GO" secondAttribute="trailing" constant="10" id="I9s-Uc-jJJ"/>
-                                    <constraint firstAttribute="height" constant="128" id="Jhc-xk-unz"/>
+                                    <constraint firstAttribute="height" constant="175" id="Jhc-xk-unz"/>
                                     <constraint firstAttribute="trailing" secondItem="fnu-t4-DRP" secondAttribute="trailing" constant="10" id="PMc-yE-rhK"/>
                                     <constraint firstAttribute="bottom" secondItem="5zJ-yy-7GO" secondAttribute="bottom" constant="5" id="ddZ-dy-c0x"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="top" secondItem="qBQ-9p-Pvb" secondAttribute="top" id="h4b-Po-d3t"/>
@@ -88,6 +88,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Home" selectedImage="HomeFilled" id="C45-L8-X9A"/>
                     <connections>
+                        <outlet property="eventDescriptionLabel" destination="5zJ-yy-7GO" id="wVw-9N-Jpf"/>
                         <outlet property="eventTitleLabel" destination="fnu-t4-DRP" id="Ock-7t-ZWY"/>
                         <outlet property="eventView" destination="qBQ-9p-Pvb" id="5Gc-by-vWr"/>
                     </connections>
