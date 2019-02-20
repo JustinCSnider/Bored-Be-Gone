@@ -25,6 +25,14 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         eventTitleLabel.adjustsFontSizeToFitWidth = true
+        EventorController.shared.grabEvents { (events) in
+            guard let events = events else { return }
+            EventorController.shared.events = events
+            DispatchQueue.main.async {
+                self.eventTitleLabel.text = events[0].title
+                self.eventDescriptionLabel.text = events[0].eventDescription
+            }
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -34,6 +42,7 @@ class HomeViewController: UIViewController {
         if eventTitleLabel.layer.sublayers == nil {
             eventTitleLabel.addBorder(side: .Bottom, thickness: 2, color: UIColor.black)
         }
+        
     }
 }
 
