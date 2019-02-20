@@ -11,12 +11,22 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //========================================
+    //MARK: - Properties
+    //========================================
+    
+    private var timer = Timer()
+    
+    //========================================
     //MARK: - IBOutlets
     //========================================
     
     @IBOutlet weak var eventView: EventView!
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventDescriptionLabel: UILabel!
+    @IBOutlet weak var dotOneImageView: UIImageView!
+    @IBOutlet weak var dotTwoImageView: UIImageView!
+    @IBOutlet weak var dotThreeImageView: UIImageView!
+    @IBOutlet weak var dotImageStackView: UIStackView!
     
     //========================================
     //MARK: - Life Cycle Methods
@@ -31,7 +41,13 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 self.eventTitleLabel.text = events[0].title
                 self.eventDescriptionLabel.text = events[0].eventDescription
+                self.eventDescriptionLabel.alpha = 1.0
+                self.dotImageStackView.alpha = 0.0
             }
+            self.timer.invalidate()
+        }
+        if EventorController.shared.events == [] {
+            runTimer()
         }
     }
     
@@ -43,6 +59,33 @@ class HomeViewController: UIViewController {
             eventTitleLabel.addBorder(side: .Bottom, thickness: 2, color: UIColor.black)
         }
         
+    }
+    
+    //========================================
+    //MARK: - Loading Methods
+    //========================================
+    
+    @objc private func loadingEvents() {
+        if dotOneImageView.image == UIImage(named: "DotFilled") {
+            resetDots()
+            dotTwoImageView.image = UIImage(named: "DotFilled")
+        } else if dotTwoImageView.image == UIImage(named: "DotFilled") {
+            resetDots()
+            dotThreeImageView.image = UIImage(named: "DotFilled")
+        } else if dotThreeImageView.image == UIImage(named: "DotFilled") {
+            resetDots()
+            dotOneImageView.image = UIImage(named: "DotFilled")
+        }
+    }
+    
+    private func runTimer() {
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(loadingEvents), userInfo: nil, repeats: true)
+    }
+    
+    private func resetDots() {
+        dotOneImageView.image = UIImage(named: "Dot")
+        dotTwoImageView.image = UIImage(named: "Dot")
+        dotThreeImageView.image = UIImage(named: "Dot")
     }
 }
 

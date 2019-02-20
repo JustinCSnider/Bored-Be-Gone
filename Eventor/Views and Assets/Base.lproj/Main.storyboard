@@ -37,13 +37,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBQ-9p-Pvb" customClass="EventView" customModule="Eventor" customModuleProvider="target">
                                 <rect key="frame" x="67.5" y="246" width="240" height="175"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-yy-7GO">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-yy-7GO">
                                         <rect key="frame" x="8" y="62.5" width="222" height="107.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="My First Event" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnu-t4-DRP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Loading Events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnu-t4-DRP">
                                         <rect key="frame" x="8" y="0.0" width="222" height="62.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="62.5" id="RiE-ya-4S9"/>
@@ -52,14 +52,30 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WaH-Dr-8MU">
+                                        <rect key="frame" x="59.5" y="98" width="121" height="37"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DotFilled" translatesAutoresizingMaskIntoConstraints="NO" id="mz9-Xd-cub">
+                                                <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dot" translatesAutoresizingMaskIntoConstraints="NO" id="ZQB-LU-WNC">
+                                                <rect key="frame" x="42" y="0.0" width="37" height="37"/>
+                                            </imageView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dot" translatesAutoresizingMaskIntoConstraints="NO" id="hVS-np-TOg">
+                                                <rect key="frame" x="84" y="0.0" width="37" height="37"/>
+                                            </imageView>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="5zJ-yy-7GO" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="DEY-fW-uqT"/>
+                                    <constraint firstItem="WaH-Dr-8MU" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="G9v-e4-YYy"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="Hk9-Sx-Fhq"/>
                                     <constraint firstAttribute="trailing" secondItem="5zJ-yy-7GO" secondAttribute="trailing" constant="10" id="I9s-Uc-jJJ"/>
                                     <constraint firstAttribute="height" constant="175" id="Jhc-xk-unz"/>
                                     <constraint firstAttribute="trailing" secondItem="fnu-t4-DRP" secondAttribute="trailing" constant="10" id="PMc-yE-rhK"/>
+                                    <constraint firstItem="WaH-Dr-8MU" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" constant="35.5" id="SUi-Yn-Jho"/>
                                     <constraint firstAttribute="bottom" secondItem="5zJ-yy-7GO" secondAttribute="bottom" constant="5" id="ddZ-dy-c0x"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="top" secondItem="qBQ-9p-Pvb" secondAttribute="top" id="h4b-Po-d3t"/>
                                     <constraint firstItem="5zJ-yy-7GO" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" id="wCV-dZ-6pB"/>
@@ -91,6 +107,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Home" selectedImage="HomeFilled" id="C45-L8-X9A"/>
                     <connections>
+                        <outlet property="dotImageStackView" destination="WaH-Dr-8MU" id="cb0-kv-lH9"/>
+                        <outlet property="dotOneImageView" destination="mz9-Xd-cub" id="yvZ-6W-Zth"/>
+                        <outlet property="dotThreeImageView" destination="hVS-np-TOg" id="tj0-sg-6kb"/>
+                        <outlet property="dotTwoImageView" destination="ZQB-LU-WNC" id="aQr-RK-AuA"/>
                         <outlet property="eventDescriptionLabel" destination="5zJ-yy-7GO" id="wVw-9N-Jpf"/>
                         <outlet property="eventTitleLabel" destination="fnu-t4-DRP" id="Ock-7t-ZWY"/>
                         <outlet property="eventView" destination="qBQ-9p-Pvb" id="5Gc-by-vWr"/>
@@ -99,6 +119,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="132.68365817091455"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="AdW-n6-Yri">
+            <objects>
+                <viewController id="dCV-jt-3Ya" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rRJ-b0-9ED">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="xNV-FF-VHq"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Me3-Li-dEu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2453.5999999999999" y="132.68365817091455"/>
         </scene>
         <!--Filters View Controller-->
         <scene sceneID="u6B-Lp-niN">
@@ -138,6 +173,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Dot" width="37.5" height="37.5"/>
+        <image name="DotFilled" width="37.5" height="37.5"/>
         <image name="Heart" width="18.75" height="18.75"/>
         <image name="HeartFilled" width="18.75" height="18.75"/>
         <image name="Home" width="18.75" height="18.75"/>
