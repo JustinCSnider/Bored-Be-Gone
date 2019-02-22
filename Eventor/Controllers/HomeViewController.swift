@@ -15,18 +15,114 @@ class HomeViewController: UIViewController {
     //========================================
     
     private var timer = Timer()
+    private var eventViewTopSpaceConstraint = NSLayoutConstraint()
+    private var eventViewBottomSpaceConstraint = NSLayoutConstraint()
     
     //========================================
     //MARK: - IBOutlets
     //========================================
     
+    //Event View outlets
     @IBOutlet weak var eventView: EventView!
+    @IBOutlet weak var eventViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eventViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet var eventViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var eventViewCenterYConstraint: NSLayoutConstraint!
+    
+    //Tap Gesture outlets
+    @IBOutlet var eventViewRecognizer: UITapGestureRecognizer!
+    @IBOutlet var homeViewRecognizer: UITapGestureRecognizer!
+    
+    
+    //Event details outlets
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventDescriptionLabel: UILabel!
+    
+    //Loading event outlets
     @IBOutlet weak var dotOneImageView: UIImageView!
     @IBOutlet weak var dotTwoImageView: UIImageView!
     @IBOutlet weak var dotThreeImageView: UIImageView!
     @IBOutlet weak var dotImageStackView: UIStackView!
+    
+    //========================================
+    //MARK: - IBActions
+    //========================================
+    
+    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
+        guard let sublayers = self.eventTitleLabel.layer.sublayers else { return }
+        
+        if sender == eventViewRecognizer {
+            //Deactivating conflicting constraints
+            NSLayoutConstraint.deactivate([eventViewHeightConstraint, eventViewCenterYConstraint])
+            
+            //Setting up programmatic top and bottom constraints
+            eventViewTopSpaceConstraint = self.eventView.topAnchor.constraint(lessThanOrEqualTo: self.view.topAnchor, constant: 120)
+            eventViewBottomSpaceConstraint = self.eventView.bottomAnchor.constraint(greaterThanOrEqualTo: self.view.bottomAnchor, constant: -170)
+            
+            //Animating constraints and shadow offsets for event view
+            UIView.animate(withDuration: 0.5) {
+                NSLayoutConstraint.activate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
+                self.eventViewLeadingConstraint.constant = 16
+                self.eventViewTrailingConstraint.constant = 16
+                self.view.layoutIfNeeded()
+            }
+            
+            
+            //Setting and animating the width and height of the bottom border for eventTitleLabel
+            let width = self.eventTitleLabel.layer.frame.width
+            let height = sublayers[0].frame.height
+            
+            UIView.animate(withDuration: 0.5) {
+                self.eventTitleLabel.layer.sublayers![0].frame.size = CGSize(width: width, height: height)
+            }
+            
+            let newShadowPath = UIBezierPath(roundedRect: eventView.bounds, cornerRadius: eventView.cornerRadius).cgPath
+
+            let shadowAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.shadowPath))
+            shadowAnimation.fromValue = eventView.layer.shadowPath
+            shadowAnimation.toValue = newShadowPath
+            shadowAnimation.duration = 0.5
+
+            eventView.layer.shadowPath = newShadowPath
+            eventView.layer.add(shadowAnimation, forKey: #keyPath(CALayer.shadowPath))
+            
+            eventViewRecognizer.isEnabled = false
+            homeViewRecognizer.isEnabled = true
+        } else if sender == homeViewRecognizer {
+            
+            //Deactivating conflicting constraints
+            NSLayoutConstraint.deactivate([eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint])
+            
+            UIView.animate(withDuration: 0.5) {
+                NSLayoutConstraint.activate([self.eventViewCenterYConstraint, self.eventViewHeightConstraint])
+                self.eventViewLeadingConstraint.constant = 67.5
+                self.eventViewTrailingConstraint.constant = 67.5
+                self.view.layoutIfNeeded()
+            }
+            
+            let width = self.eventTitleLabel.layer.frame.width
+            let height = sublayers[0].frame.height
+            
+            UIView.animate(withDuration: 0.5) {
+                self.eventTitleLabel.layer.sublayers![0].frame.size = CGSize(width: width, height: height)
+            }
+            
+            let newShadowPath = UIBezierPath(roundedRect: eventView.bounds, cornerRadius: eventView.cornerRadius).cgPath
+            
+            let shadowAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.shadowPath))
+            shadowAnimation.fromValue = eventView.layer.shadowPath
+            shadowAnimation.toValue = newShadowPath
+            shadowAnimation.duration = 0.5
+            
+            eventView.layer.shadowPath = newShadowPath
+            eventView.layer.add(shadowAnimation, forKey: #keyPath(CALayer.shadowPath))
+            
+            eventViewRecognizer.isEnabled = true
+            homeViewRecognizer.isEnabled = false
+            
+        }
+    }
+    
     
     //========================================
     //MARK: - Life Cycle Methods
@@ -43,6 +139,7 @@ class HomeViewController: UIViewController {
                 self.eventDescriptionLabel.text = events[0].eventDescription
                 self.eventDescriptionLabel.alpha = 1.0
                 self.dotImageStackView.alpha = 0.0
+                self.eventView.isUserInteractionEnabled = true
             }
             self.timer.invalidate()
         }
