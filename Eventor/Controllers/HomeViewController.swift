@@ -49,73 +49,33 @@ class HomeViewController: UIViewController {
     //========================================
     
     @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
-        guard let sublayers = self.eventTitleLabel.layer.sublayers else { return }
         
         if sender == eventViewRecognizer {
-            //Deactivating conflicting constraints
-            NSLayoutConstraint.deactivate([eventViewHeightConstraint, eventViewCenterYConstraint])
-            
             //Setting up programmatic top and bottom constraints
-            eventViewTopSpaceConstraint = self.eventView.topAnchor.constraint(lessThanOrEqualTo: self.view.topAnchor, constant: 120)
-            eventViewBottomSpaceConstraint = self.eventView.bottomAnchor.constraint(greaterThanOrEqualTo: self.view.bottomAnchor, constant: -170)
+            eventViewTopSpaceConstraint = eventView.topAnchor.constraint(lessThanOrEqualTo: self.view.topAnchor, constant: 120)
+            eventViewBottomSpaceConstraint = eventView.bottomAnchor.constraint(greaterThanOrEqualTo: self.view.bottomAnchor, constant: -170)
             
-            //Animating constraints and shadow offsets for event view
-            UIView.animate(withDuration: 0.5) {
-                NSLayoutConstraint.activate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
-                self.eventViewLeadingConstraint.constant = 16
-                self.eventViewTrailingConstraint.constant = 16
-                self.view.layoutIfNeeded()
-            }
-            
+            //Animating constraints and shadow offsets for event view along with deactivating conflicting constraints
+            animateConstraints(withDuration: 0.5, inActive: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], active: [eventViewHeightConstraint, eventViewCenterYConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 16)
             
             //Setting and animating the width and height of the bottom border for eventTitleLabel
-            let width = self.eventTitleLabel.layer.frame.width
-            let height = sublayers[0].frame.height
+            animateLabelBorder(for: eventTitleLabel)
             
-            UIView.animate(withDuration: 0.5) {
-                self.eventTitleLabel.layer.sublayers![0].frame.size = CGSize(width: width, height: height)
-            }
-            
-            let newShadowPath = UIBezierPath(roundedRect: eventView.bounds, cornerRadius: eventView.cornerRadius).cgPath
-
-            let shadowAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.shadowPath))
-            shadowAnimation.fromValue = eventView.layer.shadowPath
-            shadowAnimation.toValue = newShadowPath
-            shadowAnimation.duration = 0.5
-
-            eventView.layer.shadowPath = newShadowPath
-            eventView.layer.add(shadowAnimation, forKey: #keyPath(CALayer.shadowPath))
+            //Animating shadowPath to new eventView location
+            animateShadowPath(for: eventView)
             
             eventViewRecognizer.isEnabled = false
             homeViewRecognizer.isEnabled = true
         } else if sender == homeViewRecognizer {
             
-            //Deactivating conflicting constraints
-            NSLayoutConstraint.deactivate([eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint])
+            //Animating constraints and shadow offsets for event view along with deactivating conflicting constraints
+            animateConstraints(withDuration: 0.5, inActive: [eventViewCenterYConstraint, eventViewHeightConstraint], active: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 67.5)
             
-            UIView.animate(withDuration: 0.5) {
-                NSLayoutConstraint.activate([self.eventViewCenterYConstraint, self.eventViewHeightConstraint])
-                self.eventViewLeadingConstraint.constant = 67.5
-                self.eventViewTrailingConstraint.constant = 67.5
-                self.view.layoutIfNeeded()
-            }
+            //Setting and animating the width and height of the bottom border for eventTitleLabel
+            animateLabelBorder(for: eventTitleLabel)
             
-            let width = self.eventTitleLabel.layer.frame.width
-            let height = sublayers[0].frame.height
-            
-            UIView.animate(withDuration: 0.5) {
-                self.eventTitleLabel.layer.sublayers![0].frame.size = CGSize(width: width, height: height)
-            }
-            
-            let newShadowPath = UIBezierPath(roundedRect: eventView.bounds, cornerRadius: eventView.cornerRadius).cgPath
-            
-            let shadowAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.shadowPath))
-            shadowAnimation.fromValue = eventView.layer.shadowPath
-            shadowAnimation.toValue = newShadowPath
-            shadowAnimation.duration = 0.5
-            
-            eventView.layer.shadowPath = newShadowPath
-            eventView.layer.add(shadowAnimation, forKey: #keyPath(CALayer.shadowPath))
+            //Animating shadowPath to new eventView location
+            animateShadowPath(for: eventView)
             
             eventViewRecognizer.isEnabled = true
             homeViewRecognizer.isEnabled = false
@@ -131,6 +91,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         eventTitleLabel.adjustsFontSizeToFitWidth = true
+        
+        //Grabbing Events from the API
         EventorController.shared.grabEvents { (events) in
             guard let events = events else { return }
             EventorController.shared.events = events
@@ -143,6 +105,8 @@ class HomeViewController: UIViewController {
             }
             self.timer.invalidate()
         }
+        
+        //Running loading code if there are no events already loaded
         if EventorController.shared.events == [] {
             runTimer()
         }
@@ -183,6 +147,49 @@ class HomeViewController: UIViewController {
         dotOneImageView.image = UIImage(named: "Dot")
         dotTwoImageView.image = UIImage(named: "Dot")
         dotThreeImageView.image = UIImage(named: "Dot")
+    }
+    
+    //========================================
+    //MARK: - Animation Methods
+    //========================================
+    
+    private func animateConstraints(withDuration duration: TimeInterval, inActive: [NSLayoutConstraint], active: [NSLayoutConstraint], stayingActive currentConstraints: [NSLayoutConstraint]?, changingTo newValue: CGFloat?) {
+        
+        NSLayoutConstraint.deactivate(active)
+        
+        UIView.animate(withDuration: duration) {
+            NSLayoutConstraint.activate(inActive)
+            if let currentConstraints = currentConstraints, let newValue = newValue {
+                for i in currentConstraints {
+                    i.constant = newValue
+                }
+            }
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    private func animateShadowPath(for view: UIView) {
+        let newShadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: view.layer.cornerRadius).cgPath
+        
+        let shadowAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.shadowPath))
+        shadowAnimation.fromValue = view.layer.shadowPath
+        shadowAnimation.toValue = newShadowPath
+        shadowAnimation.duration = 0.5
+        
+        view.layer.shadowPath = newShadowPath
+        view.layer.add(shadowAnimation, forKey: #keyPath(CALayer.shadowPath))
+        
+    }
+    
+    private func animateLabelBorder(for label: UILabel) {
+        guard let sublayers = label.layer.sublayers else { return }
+        
+        let width = label.layer.frame.width
+        let height = sublayers[0].frame.height
+        
+        UIView.animate(withDuration: 0.5) {
+            label.layer.sublayers![0].frame.size = CGSize(width: width, height: height)
+        }
     }
 }
 
