@@ -66,6 +66,9 @@
                                             </imageView>
                                         </subviews>
                                     </stackView>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ThumbUp" translatesAutoresizingMaskIntoConstraints="NO" id="nYh-0n-u2J">
+                                        <rect key="frame" x="82.5" y="50" width="75" height="75"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
@@ -74,7 +77,9 @@
                                     <constraint firstItem="WaH-Dr-8MU" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="G9v-e4-YYy"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="Hk9-Sx-Fhq"/>
                                     <constraint firstAttribute="trailing" secondItem="5zJ-yy-7GO" secondAttribute="trailing" constant="10" id="I9s-Uc-jJJ"/>
+                                    <constraint firstItem="nYh-0n-u2J" firstAttribute="centerY" secondItem="qBQ-9p-Pvb" secondAttribute="centerY" id="J1G-Mb-HAP"/>
                                     <constraint firstAttribute="height" constant="175" id="Jhc-xk-unz"/>
+                                    <constraint firstItem="nYh-0n-u2J" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="MHV-4A-fjC"/>
                                     <constraint firstAttribute="trailing" secondItem="fnu-t4-DRP" secondAttribute="trailing" constant="10" id="PMc-yE-rhK"/>
                                     <constraint firstItem="WaH-Dr-8MU" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" constant="35.5" id="SUi-Yn-Jho"/>
                                     <constraint firstAttribute="bottom" secondItem="5zJ-yy-7GO" secondAttribute="bottom" constant="5" id="ddZ-dy-c0x"/>
@@ -97,6 +102,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="VpD-Td-uMb" appends="YES" id="wAq-Rq-Rsn"/>
+                                    <outletCollection property="gestureRecognizers" destination="Eo6-k3-doq" appends="YES" id="DUD-kN-X2J"/>
                                 </connections>
                             </view>
                         </subviews>
@@ -127,6 +133,7 @@
                         <outlet property="eventViewRecognizer" destination="VpD-Td-uMb" id="Moq-Ty-Ihh"/>
                         <outlet property="eventViewTrailingConstraint" destination="Ggl-oU-fNt" id="mDJ-J4-xng"/>
                         <outlet property="homeViewRecognizer" destination="1aX-zN-xE1" id="Q6v-Wu-X0I"/>
+                        <outlet property="thumbImageView" destination="nYh-0n-u2J" id="kTL-1Y-3ZP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -140,6 +147,11 @@
                         <action selector="viewTapped:" destination="BYZ-38-t0r" id="dFO-LP-cgj"/>
                     </connections>
                 </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Eo6-k3-doq">
+                    <connections>
+                        <action selector="panEventView:" destination="BYZ-38-t0r" id="YrW-RI-RGF"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1076" y="132.68365817091455"/>
         </scene>
@@ -189,5 +201,6 @@
         <image name="HomeFilled" width="18.75" height="18.75"/>
         <image name="Slider" width="18.75" height="18.75"/>
         <image name="SliderFilled" width="18.75" height="18.75"/>
+        <image name="ThumbUp" width="75" height="75"/>
     </resources>
 </document>

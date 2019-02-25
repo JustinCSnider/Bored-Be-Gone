@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
     private var timer = Timer()
     private var eventViewTopSpaceConstraint = NSLayoutConstraint()
     private var eventViewBottomSpaceConstraint = NSLayoutConstraint()
+    private var divisor: CGFloat!
     
     //========================================
     //MARK: - IBOutlets
@@ -43,6 +44,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var dotTwoImageView: UIImageView!
     @IBOutlet weak var dotThreeImageView: UIImageView!
     @IBOutlet weak var dotImageStackView: UIStackView!
+    
+    //Swipe functionality outlets
+    @IBOutlet weak var thumbImageView: UIImageView!
     
     //========================================
     //MARK: - IBActions
@@ -83,6 +87,50 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @IBAction func panEventView(_ sender: UIPanGestureRecognizer) {
+        let card = sender.view!
+        let point = sender.translation(in: view)
+        let xFromCenter = card.center.x - view.center.x
+        
+        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
+        
+        let scale = min(100/abs(xFromCenter), 1)
+        
+        card.transform = CGAffineTransform(rotationAngle: (xFromCenter/divisor)).scaledBy(x: scale, y: scale)
+        
+        if xFromCenter > 0 {
+            thumbImageView.image = UIImage(named: "ThumbUp")
+            thumbImageView.tintColor = UIColor.green
+        } else {
+            thumbImageView.image = UIImage(named: "ThumbDown")
+            thumbImageView.tintColor = UIColor.red
+        }
+        
+        thumbImageView.alpha = abs(xFromCenter) / view.center.x
+        
+        if sender.state == UIGestureRecognizer.State.ended {
+            
+            if card.center.x < 75 {
+                UIView.animate(withDuration: 0.3) {
+                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
+                    card.alpha = 0
+                }
+                return
+            } else if card.center.x > (view.frame.width - 75) {
+                UIView.animate(withDuration: 0.3) {
+                    card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
+                    card.alpha = 0
+                }
+                return
+            }
+            
+            UIView.animate(withDuration: 0.2) {
+                card.center = self.view.center
+                self.thumbImageView.alpha = 0
+                card.transform = .identity
+            }
+        }
+    }
     
     //========================================
     //MARK: - Life Cycle Methods
@@ -91,6 +139,8 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         eventTitleLabel.adjustsFontSizeToFitWidth = true
+        
+        divisor = (view.frame.width / 2) / 0.61
         
         //Grabbing Events from the API
         EventorController.shared.grabEvents { (events) in
