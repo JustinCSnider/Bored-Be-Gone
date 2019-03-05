@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  BoredBeGone
+//  Eventor
 //
 //  Created by Justin Snider on 2/11/19.
 //  Copyright © 2019 Justin Snider. All rights reserved.
@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     private var eventViewTopSpaceConstraint = NSLayoutConstraint()
     private var eventViewBottomSpaceConstraint = NSLayoutConstraint()
     private var divisor: CGFloat!
+    private var eventViewTapped = false
     
     //========================================
     //MARK: - IBOutlets
@@ -28,12 +29,10 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var eventViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet var eventViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet var eventViewCenterYConstraint: NSLayoutConstraint!
     
     //Tap Gesture outlets
     @IBOutlet var eventViewRecognizer: UITapGestureRecognizer!
     @IBOutlet var homeViewRecognizer: UITapGestureRecognizer!
-    
     
     //Event details outlets
     @IBOutlet weak var eventTitleLabel: UILabel!
@@ -60,44 +59,43 @@ class HomeViewController: UIViewController {
             eventViewBottomSpaceConstraint = eventView.bottomAnchor.constraint(greaterThanOrEqualTo: self.view.bottomAnchor, constant: -170)
             
             //Animating constraints and shadow offsets for event view along with deactivating conflicting constraints
-            animateConstraints(withDuration: 0.5, inActive: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], active: [eventViewHeightConstraint, eventViewCenterYConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 16)
+            animateConstraints(withDuration: 0.5, inActive: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], active: [eventViewHeightConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 16)
             
             //Setting and animating the width and height of the bottom border for eventTitleLabel
-            animateLabelBorder(for: eventTitleLabel)
+            animateLabelBorder(withDuration: 0.5, for: eventTitleLabel)
             
             //Animating shadowPath to new eventView location
-            animateShadowPath(for: eventView)
+            animateShadowPath(withDuration: 0.5,for: eventView, shadowOpacity: nil, shadowOpacityDuration: nil)
             
             eventViewRecognizer.isEnabled = false
             homeViewRecognizer.isEnabled = true
+            eventViewTapped = true
         } else if sender == homeViewRecognizer {
             
             //Animating constraints and shadow offsets for event view along with deactivating conflicting constraints
-            animateConstraints(withDuration: 0.5, inActive: [eventViewCenterYConstraint, eventViewHeightConstraint], active: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 67.5)
+            animateConstraints(withDuration: 0.5, inActive: [eventViewHeightConstraint], active: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 67.5)
             
             //Setting and animating the width and height of the bottom border for eventTitleLabel
-            animateLabelBorder(for: eventTitleLabel)
+            animateLabelBorder(withDuration: 0.5, for: eventTitleLabel)
             
             //Animating shadowPath to new eventView location
-            animateShadowPath(for: eventView)
+            animateShadowPath(withDuration: 0.5, for: eventView, shadowOpacity: nil, shadowOpacityDuration: nil)
             
             eventViewRecognizer.isEnabled = true
             homeViewRecognizer.isEnabled = false
-            
+            eventViewTapped = false
         }
     }
     
     @IBAction func panEventView(_ sender: UIPanGestureRecognizer) {
-        let card = sender.view!
+        //Setting variables for rotation animation
         let point = sender.translation(in: view)
-        let xFromCenter = card.center.x - view.center.x
+        let xFromCenter = self.eventView.center.x - view.center.x
         
-        card.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
-        
+        //Animating rotation and scale
+        self.eventView.center = CGPoint(x: view.center.x + point.x, y: view.center.y + point.y)
         let scale = min(100/abs(xFromCenter), 1)
-        
-        card.transform = CGAffineTransform(rotationAngle: (xFromCenter/divisor)).scaledBy(x: scale, y: scale)
-        
+        self.eventView.transform = CGAffineTransform(rotationAngle: (xFromCenter/divisor)).scaledBy(x: scale, y: scale)
         if xFromCenter > 0 {
             thumbImageView.image = UIImage(named: "ThumbUp")
             thumbImageView.tintColor = UIColor.green
@@ -105,29 +103,88 @@ class HomeViewController: UIViewController {
             thumbImageView.image = UIImage(named: "ThumbDown")
             thumbImageView.tintColor = UIColor.red
         }
-        
         thumbImageView.alpha = abs(xFromCenter) / view.center.x
         
+        //Ran when the user is done swiping
         if sender.state == UIGestureRecognizer.State.ended {
             
-            if card.center.x < 75 {
-                UIView.animate(withDuration: 0.3) {
-                    card.center = CGPoint(x: card.center.x - 200, y: card.center.y)
-                    card.alpha = 0
-                }
+            if self.eventView.center.x < 75 {
+                UIView.animate(withDuration: 0.3, animations: {
+                    //Animating event view away
+                    self.eventView.center = CGPoint(x: self.eventView.center.x - 200, y: self.eventView.center.y)
+                    self.eventView.alpha = 0
+                }, completion: {(finished) in
+                    //Setting up pre-animation scale, location, and alpha
+                    self.eventView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+                    self.eventView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                    self.eventView.layer.shadowPath = UIBezierPath(roundedRect: self.eventView.frame, cornerRadius: self.eventView.layer.cornerRadius).cgPath
+                    self.eventView.layer.shadowOpacity = 0
+                    self.thumbImageView.alpha = 0
+                    //Setting up constraints and recognizers if needed
+                    if self.eventViewTapped {
+                        NSLayoutConstraint.deactivate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
+                        NSLayoutConstraint.activate([self.eventViewHeightConstraint])
+                        self.eventViewLeadingConstraint.constant = 67.5
+                        self.eventViewTrailingConstraint.constant = 67.5
+                        self.eventViewRecognizer.isEnabled = true
+                        self.homeViewRecognizer.isEnabled = false
+                    }
+                    
+                    //Animating view back into place
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.eventView.alpha = 1
+                        self.eventView.transform = .identity
+                    })
+                    self.view.layoutIfNeeded()
+                    
+                    self.animateLabelBorder(withDuration: 0.5, for: self.eventTitleLabel)
+                    
+                    self.animateShadowPath(withDuration: 0.25, for: self.eventView, shadowOpacity: 0.5, shadowOpacityDuration: 0.75)
+                    
+                })
                 return
-            } else if card.center.x > (view.frame.width - 75) {
-                UIView.animate(withDuration: 0.3) {
-                    card.center = CGPoint(x: card.center.x + 200, y: card.center.y)
-                    card.alpha = 0
-                }
+            } else if self.eventView.center.x > (view.frame.width - 75) {
+                UIView.animate(withDuration: 0.3, animations: {
+                    //Animating event view away
+                    self.eventView.center = CGPoint(x: self.eventView.center.x + 200, y: self.eventView.center.y)
+                    self.eventView.alpha = 0
+                }, completion: {(finished) in
+                    //Setting up pre-animation scale, location, and alpha
+                    self.eventView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+                    self.eventView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                    self.eventView.layer.shadowPath = UIBezierPath(roundedRect: self.eventView.frame, cornerRadius: self.eventView.layer.cornerRadius).cgPath
+                    self.eventView.layer.shadowOpacity = 0
+                    self.thumbImageView.alpha = 0
+                    //Setting up constraints and recognizers if needed
+                    if self.eventViewTapped {
+                        NSLayoutConstraint.deactivate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
+                        NSLayoutConstraint.activate([self.eventViewHeightConstraint])
+                        self.eventViewLeadingConstraint.constant = 67.5
+                        self.eventViewTrailingConstraint.constant = 67.5
+                        self.eventViewRecognizer.isEnabled = true
+                        self.homeViewRecognizer.isEnabled = false
+                    }
+                    
+                    //Animating view back into place
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self.eventView.alpha = 1
+                        self.eventView.transform = .identity
+                    })
+                    self.view.layoutIfNeeded()
+                    
+                    self.animateLabelBorder(withDuration: 0.5, for: self.eventTitleLabel)
+                    
+                    self.animateShadowPath(withDuration: 0.25, for: self.eventView, shadowOpacity: 0.5, shadowOpacityDuration: 0.75)
+                    
+                })
                 return
             }
             
+            //Animate view back into place if they didn't fully swipe the view away
             UIView.animate(withDuration: 0.2) {
-                card.center = self.view.center
+                self.eventView.center = self.view.center
                 self.thumbImageView.alpha = 0
-                card.transform = .identity
+                self.eventView.transform = .identity
             }
         }
     }
@@ -140,6 +197,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         eventTitleLabel.adjustsFontSizeToFitWidth = true
         
+        //Setting divisor for animations
         divisor = (view.frame.width / 2) / 0.61
         
         //Grabbing Events from the API
@@ -214,30 +272,41 @@ class HomeViewController: UIViewController {
                     i.constant = newValue
                 }
             }
+            
             self.view.layoutIfNeeded()
         }
     }
     
-    private func animateShadowPath(for view: UIView) {
+    private func animateShadowPath(withDuration duration: TimeInterval,for view: UIView, shadowOpacity: Float?, shadowOpacityDuration: TimeInterval?) {
         let newShadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: view.layer.cornerRadius).cgPath
         
-        let shadowAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.shadowPath))
-        shadowAnimation.fromValue = view.layer.shadowPath
-        shadowAnimation.toValue = newShadowPath
-        shadowAnimation.duration = 0.5
+        let shadowPathAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.shadowPath))
+        shadowPathAnimation.fromValue = view.layer.shadowPath
+        shadowPathAnimation.toValue = newShadowPath
+        shadowPathAnimation.duration = duration
         
         view.layer.shadowPath = newShadowPath
-        view.layer.add(shadowAnimation, forKey: #keyPath(CALayer.shadowPath))
+        view.layer.add(shadowPathAnimation, forKey: #keyPath(CALayer.shadowPath))
+        
+        if let newShadowOpacity = shadowOpacity, let newShadowOpacityDuration = shadowOpacityDuration {
+            let shadowOpacityAnimation = CABasicAnimation(keyPath: #keyPath(CALayer.shadowOpacity))
+            shadowOpacityAnimation.fromValue = view.layer.shadowOpacity
+            shadowOpacityAnimation.toValue = newShadowOpacity
+            shadowOpacityAnimation.duration = newShadowOpacityDuration
+            
+            view.layer.shadowOpacity = newShadowOpacity
+            view.layer.add(shadowOpacityAnimation, forKey: #keyPath(CALayer.shadowOpacity))
+        }
         
     }
     
-    private func animateLabelBorder(for label: UILabel) {
+    private func animateLabelBorder(withDuration duration: TimeInterval, for label: UILabel) {
         guard let sublayers = label.layer.sublayers else { return }
         
         let width = label.layer.frame.width
         let height = sublayers[0].frame.height
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: duration) {
             label.layer.sublayers![0].frame.size = CGSize(width: width, height: height)
         }
     }

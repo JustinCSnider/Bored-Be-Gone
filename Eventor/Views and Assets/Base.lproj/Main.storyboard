@@ -111,6 +111,7 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qBQ-9p-Pvb" secondAttribute="trailing" constant="67.5" id="Ggl-oU-fNt"/>
                             <constraint firstItem="qBQ-9p-Pvb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67.5" id="H38-sH-YfD"/>
+                            <constraint firstItem="qBQ-9p-Pvb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="McZ-3c-cSu"/>
                             <constraint firstItem="qBQ-9p-Pvb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Tyi-YQ-mSV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -127,7 +128,6 @@
                         <outlet property="eventDescriptionLabel" destination="5zJ-yy-7GO" id="wVw-9N-Jpf"/>
                         <outlet property="eventTitleLabel" destination="fnu-t4-DRP" id="Ock-7t-ZWY"/>
                         <outlet property="eventView" destination="qBQ-9p-Pvb" id="5Gc-by-vWr"/>
-                        <outlet property="eventViewCenterYConstraint" destination="Tyi-YQ-mSV" id="j5K-zt-Idz"/>
                         <outlet property="eventViewHeightConstraint" destination="Jhc-xk-unz" id="asC-gE-Wtp"/>
                         <outlet property="eventViewLeadingConstraint" destination="H38-sH-YfD" id="IQe-QR-7kd"/>
                         <outlet property="eventViewRecognizer" destination="VpD-Td-uMb" id="Moq-Ty-Ihh"/>
