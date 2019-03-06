@@ -15,7 +15,9 @@ class EventorController {
     //========================================
     
     static var shared = EventorController()
-    var events = [Event]()
+    private var events = [Event]()
+    private var currentEvent = Event()
+    private var currentEventIndex = 0
     
     //========================================
     //MARK: - Network Methods
@@ -41,6 +43,24 @@ class EventorController {
                 completion(results)
             }
         }
+    }
+    
+    //========================================
+    //MARK: - Getters and Setters
+    //========================================
+    
+    func getCurrentEvent() -> Event {
+        currentEvent = events[currentEventIndex]
+        currentEventIndex += 1
+        return currentEvent
+    }
+    
+    func setEvents(events: [Event]) {
+        self.events = events
+    }
+    
+    func getEvents() -> [Event] {
+        return events
     }
     
     //========================================

@@ -14,7 +14,10 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     //========================================
     
+    //Loading properties
     private var timer = Timer()
+    
+    //Swipe and tap animation properties
     private var eventViewTopSpaceConstraint = NSLayoutConstraint()
     private var eventViewBottomSpaceConstraint = NSLayoutConstraint()
     private var divisor: CGFloat!
@@ -29,6 +32,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var eventViewTrailingConstraint: NSLayoutConstraint!
     @IBOutlet weak var eventViewLeadingConstraint: NSLayoutConstraint!
     @IBOutlet var eventViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var eventScrollView: UIScrollView!
     
     //Tap Gesture outlets
     @IBOutlet var eventViewRecognizer: UITapGestureRecognizer!
@@ -37,6 +41,7 @@ class HomeViewController: UIViewController {
     //Event details outlets
     @IBOutlet weak var eventTitleLabel: UILabel!
     @IBOutlet weak var eventDescriptionLabel: UILabel!
+    @IBOutlet var eventDescriptionHeightConstraint: NSLayoutConstraint!
     
     //Loading event outlets
     @IBOutlet weak var dotOneImageView: UIImageView!
@@ -59,7 +64,7 @@ class HomeViewController: UIViewController {
             eventViewBottomSpaceConstraint = eventView.bottomAnchor.constraint(greaterThanOrEqualTo: self.view.bottomAnchor, constant: -170)
             
             //Animating constraints and shadow offsets for event view along with deactivating conflicting constraints
-            animateConstraints(withDuration: 0.5, inActive: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], active: [eventViewHeightConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 16)
+            animateConstraints(withDuration: 0.5, inActive: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], active: [eventViewHeightConstraint, eventDescriptionHeightConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 16)
             
             //Setting and animating the width and height of the bottom border for eventTitleLabel
             animateLabelBorder(withDuration: 0.5, for: eventTitleLabel)
@@ -69,11 +74,12 @@ class HomeViewController: UIViewController {
             
             eventViewRecognizer.isEnabled = false
             homeViewRecognizer.isEnabled = true
+            eventScrollView.isUserInteractionEnabled = true
             eventViewTapped = true
         } else if sender == homeViewRecognizer {
             
             //Animating constraints and shadow offsets for event view along with deactivating conflicting constraints
-            animateConstraints(withDuration: 0.5, inActive: [eventViewHeightConstraint], active: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 67.5)
+            animateConstraints(withDuration: 0.5, inActive: [eventViewHeightConstraint, eventDescriptionHeightConstraint], active: [eventViewTopSpaceConstraint, eventViewBottomSpaceConstraint], stayingActive: [eventViewLeadingConstraint, eventViewTrailingConstraint], changingTo: 67.5)
             
             //Setting and animating the width and height of the bottom border for eventTitleLabel
             animateLabelBorder(withDuration: 0.5, for: eventTitleLabel)
@@ -83,6 +89,7 @@ class HomeViewController: UIViewController {
             
             eventViewRecognizer.isEnabled = true
             homeViewRecognizer.isEnabled = false
+            eventScrollView.isUserInteractionEnabled = false
             eventViewTapped = false
         }
     }
@@ -123,12 +130,20 @@ class HomeViewController: UIViewController {
                     //Setting up constraints and recognizers if needed
                     if self.eventViewTapped {
                         NSLayoutConstraint.deactivate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
-                        NSLayoutConstraint.activate([self.eventViewHeightConstraint])
+                        NSLayoutConstraint.activate([self.eventViewHeightConstraint, self.eventDescriptionHeightConstraint])
                         self.eventViewLeadingConstraint.constant = 67.5
                         self.eventViewTrailingConstraint.constant = 67.5
                         self.eventViewRecognizer.isEnabled = true
                         self.homeViewRecognizer.isEnabled = false
+                        self.eventScrollView.isUserInteractionEnabled = false
                     }
+                    
+                    //Setting event view up for new event
+                    let eventorController = EventorController.shared
+                    let currentEvent = eventorController.getCurrentEvent()
+                    
+                    self.eventTitleLabel.text = currentEvent.title
+                    self.eventDescriptionLabel.text = currentEvent.eventDescription
                     
                     //Animating view back into place
                     UIView.animate(withDuration: 0.5, animations: {
@@ -158,12 +173,20 @@ class HomeViewController: UIViewController {
                     //Setting up constraints and recognizers if needed
                     if self.eventViewTapped {
                         NSLayoutConstraint.deactivate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
-                        NSLayoutConstraint.activate([self.eventViewHeightConstraint])
+                        NSLayoutConstraint.activate([self.eventViewHeightConstraint, self.eventDescriptionHeightConstraint])
                         self.eventViewLeadingConstraint.constant = 67.5
                         self.eventViewTrailingConstraint.constant = 67.5
                         self.eventViewRecognizer.isEnabled = true
                         self.homeViewRecognizer.isEnabled = false
+                        self.eventScrollView.isUserInteractionEnabled = false
                     }
+                    
+                    //Setting event view up for new event
+                    let eventorController = EventorController.shared
+                    let currentEvent = eventorController.getCurrentEvent()
+                    
+                    self.eventTitleLabel.text = currentEvent.title
+                    self.eventDescriptionLabel.text = currentEvent.eventDescription
                     
                     //Animating view back into place
                     UIView.animate(withDuration: 0.5, animations: {
@@ -200,13 +223,17 @@ class HomeViewController: UIViewController {
         //Setting divisor for animations
         divisor = (view.frame.width / 2) / 0.61
         
+        //Setting variables for grabbing events
+        let eventorController = EventorController.shared
+        
         //Grabbing Events from the API
-        EventorController.shared.grabEvents { (events) in
+        eventorController.grabEvents { (events) in
             guard let events = events else { return }
-            EventorController.shared.events = events
+            eventorController.setEvents(events: events)
+            let currentEvent = eventorController.getCurrentEvent()
             DispatchQueue.main.async {
-                self.eventTitleLabel.text = events[0].title
-                self.eventDescriptionLabel.text = events[0].eventDescription
+                self.eventTitleLabel.text = currentEvent.title
+                self.eventDescriptionLabel.text = currentEvent.eventDescription
                 self.eventDescriptionLabel.alpha = 1.0
                 self.dotImageStackView.alpha = 0.0
                 self.eventView.isUserInteractionEnabled = true
@@ -215,7 +242,7 @@ class HomeViewController: UIViewController {
         }
         
         //Running loading code if there are no events already loaded
-        if EventorController.shared.events == [] {
+        if eventorController.getEvents() == [] {
             runTimer()
         }
     }

@@ -37,12 +37,6 @@
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBQ-9p-Pvb" customClass="EventView" customModule="Eventor" customModuleProvider="target">
                                 <rect key="frame" x="67.5" y="246" width="240" height="175"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-yy-7GO">
-                                        <rect key="frame" x="8" y="62.5" width="222" height="107.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Loading Events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnu-t4-DRP">
                                         <rect key="frame" x="8" y="0.0" width="222" height="62.5"/>
                                         <constraints>
@@ -69,22 +63,43 @@
                                     <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ThumbUp" translatesAutoresizingMaskIntoConstraints="NO" id="nYh-0n-u2J">
                                         <rect key="frame" x="82.5" y="50" width="75" height="75"/>
                                     </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdT-t8-Uhd">
+                                        <rect key="frame" x="0.0" y="62.5" width="240" height="112.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-yy-7GO">
+                                                <rect key="frame" x="8" y="0.0" width="210" height="107.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="107.5" id="2eo-sK-v9h"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="5zJ-yy-7GO" firstAttribute="top" secondItem="BdT-t8-Uhd" secondAttribute="top" id="8Sp-NM-MU8"/>
+                                            <constraint firstAttribute="trailing" secondItem="5zJ-yy-7GO" secondAttribute="trailing" constant="22" id="Bg4-9u-LRd"/>
+                                            <constraint firstAttribute="bottom" secondItem="5zJ-yy-7GO" secondAttribute="bottom" id="oXZ-5z-OJ6"/>
+                                            <constraint firstItem="5zJ-yy-7GO" firstAttribute="leading" secondItem="BdT-t8-Uhd" secondAttribute="leading" constant="8" id="udd-T9-JmY"/>
+                                        </constraints>
+                                    </scrollView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="5zJ-yy-7GO" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="DEY-fW-uqT"/>
                                     <constraint firstItem="WaH-Dr-8MU" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="G9v-e4-YYy"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="Hk9-Sx-Fhq"/>
-                                    <constraint firstAttribute="trailing" secondItem="5zJ-yy-7GO" secondAttribute="trailing" constant="10" id="I9s-Uc-jJJ"/>
                                     <constraint firstItem="nYh-0n-u2J" firstAttribute="centerY" secondItem="qBQ-9p-Pvb" secondAttribute="centerY" id="J1G-Mb-HAP"/>
                                     <constraint firstAttribute="height" constant="175" id="Jhc-xk-unz"/>
                                     <constraint firstItem="nYh-0n-u2J" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="MHV-4A-fjC"/>
                                     <constraint firstAttribute="trailing" secondItem="fnu-t4-DRP" secondAttribute="trailing" constant="10" id="PMc-yE-rhK"/>
                                     <constraint firstItem="WaH-Dr-8MU" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" constant="35.5" id="SUi-Yn-Jho"/>
-                                    <constraint firstAttribute="bottom" secondItem="5zJ-yy-7GO" secondAttribute="bottom" constant="5" id="ddZ-dy-c0x"/>
+                                    <constraint firstItem="BdT-t8-Uhd" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" id="aEy-RV-jdy"/>
+                                    <constraint firstItem="5zJ-yy-7GO" firstAttribute="width" secondItem="qBQ-9p-Pvb" secondAttribute="width" constant="-30" id="cqy-XQ-XPc"/>
+                                    <constraint firstAttribute="bottom" secondItem="BdT-t8-Uhd" secondAttribute="bottom" id="eCU-Ar-rgo"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="top" secondItem="qBQ-9p-Pvb" secondAttribute="top" id="h4b-Po-d3t"/>
-                                    <constraint firstItem="5zJ-yy-7GO" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" id="wCV-dZ-6pB"/>
+                                    <constraint firstAttribute="trailing" secondItem="BdT-t8-Uhd" secondAttribute="trailing" id="sRi-MG-Laj"/>
+                                    <constraint firstItem="BdT-t8-Uhd" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" id="vOr-Li-rJI"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -125,7 +140,9 @@
                         <outlet property="dotOneImageView" destination="mz9-Xd-cub" id="yvZ-6W-Zth"/>
                         <outlet property="dotThreeImageView" destination="hVS-np-TOg" id="tj0-sg-6kb"/>
                         <outlet property="dotTwoImageView" destination="ZQB-LU-WNC" id="aQr-RK-AuA"/>
+                        <outlet property="eventDescriptionHeightConstraint" destination="2eo-sK-v9h" id="Eix-09-AmF"/>
                         <outlet property="eventDescriptionLabel" destination="5zJ-yy-7GO" id="wVw-9N-Jpf"/>
+                        <outlet property="eventScrollView" destination="BdT-t8-Uhd" id="Kge-Gj-Zks"/>
                         <outlet property="eventTitleLabel" destination="fnu-t4-DRP" id="Ock-7t-ZWY"/>
                         <outlet property="eventView" destination="qBQ-9p-Pvb" id="5Gc-by-vWr"/>
                         <outlet property="eventViewHeightConstraint" destination="Jhc-xk-unz" id="asC-gE-Wtp"/>
