@@ -18,13 +18,14 @@ class EventorController {
     private var events = [Event]()
     private var currentEvent = Event()
     private var currentEventIndex = 0
+    private var currentURLString = "https://api.predicthq.com/v1/events/"
     
     //========================================
     //MARK: - Network Methods
     //========================================
     
     func grabEvents(completion: (([Event]?) -> Void)? = nil) {
-        guard let url = URL(string: "https://api.predicthq.com/v1/events/") else {
+        guard let url = URL(string: currentURLString) else {
             print("Bad URL")
             return
         }
@@ -36,7 +37,20 @@ class EventorController {
             var results = [Event]()
             
             if let events = try? decoder.decode(Events.self, from: data) {
-                results = events.results
+                
+                if let nextURLString = events.next {
+                    self.currentURLString = nextURLString
+                } else {
+                    self.currentURLString = "https://api.predicthq.com/v1/events/"
+                }
+
+                var descriptEvents = events.results
+                for i in descriptEvents {
+                    if i.eventDescription == "", let eventIndex = descriptEvents.firstIndex(of: i) {
+                        descriptEvents.remove(at: eventIndex)
+                    }
+                }
+                results = descriptEvents
             }
             
             if let completion = completion {
@@ -49,7 +63,11 @@ class EventorController {
     //MARK: - Getters and Setters
     //========================================
     
-    func getCurrentEvent() -> Event {
+    func getCurrentEvent() -> Event? {
+        if (currentEventIndex + 1) > events.count {
+            currentEventIndex = 0
+            return nil
+        }
         currentEvent = events[currentEventIndex]
         currentEventIndex += 1
         return currentEvent

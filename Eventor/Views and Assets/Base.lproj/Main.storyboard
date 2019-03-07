@@ -37,6 +37,9 @@
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBQ-9p-Pvb" customClass="EventView" customModule="Eventor" customModuleProvider="target">
                                 <rect key="frame" x="67.5" y="246" width="240" height="175"/>
                                 <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e6k-Ho-LSq">
+                                        <rect key="frame" x="110" y="102.5" width="20" height="20"/>
+                                    </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Loading Events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnu-t4-DRP">
                                         <rect key="frame" x="8" y="0.0" width="222" height="62.5"/>
                                         <constraints>
@@ -46,20 +49,6 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="WaH-Dr-8MU">
-                                        <rect key="frame" x="59.5" y="98" width="121" height="37"/>
-                                        <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DotFilled" translatesAutoresizingMaskIntoConstraints="NO" id="mz9-Xd-cub">
-                                                <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dot" translatesAutoresizingMaskIntoConstraints="NO" id="ZQB-LU-WNC">
-                                                <rect key="frame" x="42" y="0.0" width="37" height="37"/>
-                                            </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dot" translatesAutoresizingMaskIntoConstraints="NO" id="hVS-np-TOg">
-                                                <rect key="frame" x="84" y="0.0" width="37" height="37"/>
-                                            </imageView>
-                                        </subviews>
-                                    </stackView>
                                     <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ThumbUp" translatesAutoresizingMaskIntoConstraints="NO" id="nYh-0n-u2J">
                                         <rect key="frame" x="82.5" y="50" width="75" height="75"/>
                                     </imageView>
@@ -87,17 +76,17 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
                                 <constraints>
-                                    <constraint firstItem="WaH-Dr-8MU" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="G9v-e4-YYy"/>
+                                    <constraint firstItem="e6k-Ho-LSq" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="A8c-dP-JXf"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="Hk9-Sx-Fhq"/>
                                     <constraint firstItem="nYh-0n-u2J" firstAttribute="centerY" secondItem="qBQ-9p-Pvb" secondAttribute="centerY" id="J1G-Mb-HAP"/>
                                     <constraint firstAttribute="height" constant="175" id="Jhc-xk-unz"/>
                                     <constraint firstItem="nYh-0n-u2J" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="MHV-4A-fjC"/>
                                     <constraint firstAttribute="trailing" secondItem="fnu-t4-DRP" secondAttribute="trailing" constant="10" id="PMc-yE-rhK"/>
-                                    <constraint firstItem="WaH-Dr-8MU" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" constant="35.5" id="SUi-Yn-Jho"/>
                                     <constraint firstItem="BdT-t8-Uhd" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" id="aEy-RV-jdy"/>
                                     <constraint firstItem="5zJ-yy-7GO" firstAttribute="width" secondItem="qBQ-9p-Pvb" secondAttribute="width" constant="-30" id="cqy-XQ-XPc"/>
                                     <constraint firstAttribute="bottom" secondItem="BdT-t8-Uhd" secondAttribute="bottom" id="eCU-Ar-rgo"/>
                                     <constraint firstItem="fnu-t4-DRP" firstAttribute="top" secondItem="qBQ-9p-Pvb" secondAttribute="top" id="h4b-Po-d3t"/>
+                                    <constraint firstItem="e6k-Ho-LSq" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" constant="40" id="sHf-QP-F5N"/>
                                     <constraint firstAttribute="trailing" secondItem="BdT-t8-Uhd" secondAttribute="trailing" id="sRi-MG-Laj"/>
                                     <constraint firstItem="BdT-t8-Uhd" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" id="vOr-Li-rJI"/>
                                 </constraints>
@@ -136,10 +125,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Home" selectedImage="HomeFilled" id="C45-L8-X9A"/>
                     <connections>
-                        <outlet property="dotImageStackView" destination="WaH-Dr-8MU" id="cb0-kv-lH9"/>
-                        <outlet property="dotOneImageView" destination="mz9-Xd-cub" id="yvZ-6W-Zth"/>
-                        <outlet property="dotThreeImageView" destination="hVS-np-TOg" id="tj0-sg-6kb"/>
-                        <outlet property="dotTwoImageView" destination="ZQB-LU-WNC" id="aQr-RK-AuA"/>
                         <outlet property="eventDescriptionHeightConstraint" destination="2eo-sK-v9h" id="Eix-09-AmF"/>
                         <outlet property="eventDescriptionLabel" destination="5zJ-yy-7GO" id="wVw-9N-Jpf"/>
                         <outlet property="eventScrollView" destination="BdT-t8-Uhd" id="Kge-Gj-Zks"/>
@@ -150,6 +135,7 @@
                         <outlet property="eventViewRecognizer" destination="VpD-Td-uMb" id="Moq-Ty-Ihh"/>
                         <outlet property="eventViewTrailingConstraint" destination="Ggl-oU-fNt" id="mDJ-J4-xng"/>
                         <outlet property="homeViewRecognizer" destination="1aX-zN-xE1" id="Q6v-Wu-X0I"/>
+                        <outlet property="loadingActivityIndicator" destination="e6k-Ho-LSq" id="JKz-JM-gPf"/>
                         <outlet property="thumbImageView" destination="nYh-0n-u2J" id="kTL-1Y-3ZP"/>
                     </connections>
                 </viewController>
@@ -210,8 +196,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Dot" width="37.5" height="37.5"/>
-        <image name="DotFilled" width="37.5" height="37.5"/>
         <image name="Heart" width="18.75" height="18.75"/>
         <image name="HeartFilled" width="18.75" height="18.75"/>
         <image name="Home" width="18.75" height="18.75"/>

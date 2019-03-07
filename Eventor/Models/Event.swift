@@ -30,4 +30,5 @@ class Event: NSManagedObject, Decodable {
 
 struct Events: Decodable {
     let results: [Event]
+    let next: String?
 }

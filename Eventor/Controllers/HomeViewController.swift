@@ -14,9 +14,6 @@ class HomeViewController: UIViewController {
     //MARK: - Properties
     //========================================
     
-    //Loading properties
-    private var timer = Timer()
-    
     //Swipe and tap animation properties
     private var eventViewTopSpaceConstraint = NSLayoutConstraint()
     private var eventViewBottomSpaceConstraint = NSLayoutConstraint()
@@ -43,11 +40,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var eventDescriptionLabel: UILabel!
     @IBOutlet var eventDescriptionHeightConstraint: NSLayoutConstraint!
     
-    //Loading event outlets
-    @IBOutlet weak var dotOneImageView: UIImageView!
-    @IBOutlet weak var dotTwoImageView: UIImageView!
-    @IBOutlet weak var dotThreeImageView: UIImageView!
-    @IBOutlet weak var dotImageStackView: UIStackView!
+    //Loading events outlets
+    @IBOutlet weak var loadingActivityIndicator: UIActivityIndicatorView!
     
     //Swipe functionality outlets
     @IBOutlet weak var thumbImageView: UIImageView!
@@ -87,6 +81,7 @@ class HomeViewController: UIViewController {
             //Animating shadowPath to new eventView location
             animateShadowPath(withDuration: 0.5, for: eventView, shadowOpacity: nil, shadowOpacityDuration: nil)
             
+            //Setting
             eventViewRecognizer.isEnabled = true
             homeViewRecognizer.isEnabled = false
             eventScrollView.isUserInteractionEnabled = false
@@ -110,6 +105,8 @@ class HomeViewController: UIViewController {
             thumbImageView.image = UIImage(named: "ThumbDown")
             thumbImageView.tintColor = UIColor.red
         }
+        
+        //Setting thumbImageView alpha based on position
         thumbImageView.alpha = abs(xFromCenter) / view.center.x
         
         //Ran when the user is done swiping
@@ -121,29 +118,18 @@ class HomeViewController: UIViewController {
                     self.eventView.center = CGPoint(x: self.eventView.center.x - 200, y: self.eventView.center.y)
                     self.eventView.alpha = 0
                 }, completion: {(finished) in
-                    //Setting up pre-animation scale, location, and alpha
-                    self.eventView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
-                    self.eventView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-                    self.eventView.layer.shadowPath = UIBezierPath(roundedRect: self.eventView.frame, cornerRadius: self.eventView.layer.cornerRadius).cgPath
-                    self.eventView.layer.shadowOpacity = 0
-                    self.thumbImageView.alpha = 0
-                    //Setting up constraints and recognizers if needed
-                    if self.eventViewTapped {
-                        NSLayoutConstraint.deactivate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
-                        NSLayoutConstraint.activate([self.eventViewHeightConstraint, self.eventDescriptionHeightConstraint])
-                        self.eventViewLeadingConstraint.constant = 67.5
-                        self.eventViewTrailingConstraint.constant = 67.5
-                        self.eventViewRecognizer.isEnabled = true
-                        self.homeViewRecognizer.isEnabled = false
-                        self.eventScrollView.isUserInteractionEnabled = false
-                    }
+                    //Setting event view up for animation
+                    self.postSwipeSetUp()
                     
                     //Setting event view up for new event
                     let eventorController = EventorController.shared
-                    let currentEvent = eventorController.getCurrentEvent()
-                    
-                    self.eventTitleLabel.text = currentEvent.title
-                    self.eventDescriptionLabel.text = currentEvent.eventDescription
+                    if let currentEvent = eventorController.getCurrentEvent() {
+                        self.eventTitleLabel.text = currentEvent.title
+                        self.eventDescriptionLabel.text = currentEvent.eventDescription
+                    } else {
+                        //Grabbing events and showing loading animations
+                        self.startLoadingEvents()
+                    }
                     
                     //Animating view back into place
                     UIView.animate(withDuration: 0.5, animations: {
@@ -164,29 +150,19 @@ class HomeViewController: UIViewController {
                     self.eventView.center = CGPoint(x: self.eventView.center.x + 200, y: self.eventView.center.y)
                     self.eventView.alpha = 0
                 }, completion: {(finished) in
-                    //Setting up pre-animation scale, location, and alpha
-                    self.eventView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
-                    self.eventView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-                    self.eventView.layer.shadowPath = UIBezierPath(roundedRect: self.eventView.frame, cornerRadius: self.eventView.layer.cornerRadius).cgPath
-                    self.eventView.layer.shadowOpacity = 0
-                    self.thumbImageView.alpha = 0
-                    //Setting up constraints and recognizers if needed
-                    if self.eventViewTapped {
-                        NSLayoutConstraint.deactivate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
-                        NSLayoutConstraint.activate([self.eventViewHeightConstraint, self.eventDescriptionHeightConstraint])
-                        self.eventViewLeadingConstraint.constant = 67.5
-                        self.eventViewTrailingConstraint.constant = 67.5
-                        self.eventViewRecognizer.isEnabled = true
-                        self.homeViewRecognizer.isEnabled = false
-                        self.eventScrollView.isUserInteractionEnabled = false
-                    }
+                    //Setting event view up for animation 
+                    self.postSwipeSetUp()
                     
                     //Setting event view up for new event
                     let eventorController = EventorController.shared
-                    let currentEvent = eventorController.getCurrentEvent()
+                    if let currentEvent = eventorController.getCurrentEvent() {
+                        self.eventTitleLabel.text = currentEvent.title
+                        self.eventDescriptionLabel.text = currentEvent.eventDescription
+                    } else {
+                        //Grabbing events and showing loading animations
+                        self.startLoadingEvents()
+                    }
                     
-                    self.eventTitleLabel.text = currentEvent.title
-                    self.eventDescriptionLabel.text = currentEvent.eventDescription
                     
                     //Animating view back into place
                     UIView.animate(withDuration: 0.5, animations: {
@@ -223,28 +199,8 @@ class HomeViewController: UIViewController {
         //Setting divisor for animations
         divisor = (view.frame.width / 2) / 0.61
         
-        //Setting variables for grabbing events
-        let eventorController = EventorController.shared
-        
-        //Grabbing Events from the API
-        eventorController.grabEvents { (events) in
-            guard let events = events else { return }
-            eventorController.setEvents(events: events)
-            let currentEvent = eventorController.getCurrentEvent()
-            DispatchQueue.main.async {
-                self.eventTitleLabel.text = currentEvent.title
-                self.eventDescriptionLabel.text = currentEvent.eventDescription
-                self.eventDescriptionLabel.alpha = 1.0
-                self.dotImageStackView.alpha = 0.0
-                self.eventView.isUserInteractionEnabled = true
-            }
-            self.timer.invalidate()
-        }
-        
-        //Running loading code if there are no events already loaded
-        if eventorController.getEvents() == [] {
-            runTimer()
-        }
+        //Grabbing events and showing loading animations
+        startLoadingEvents()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -257,31 +213,57 @@ class HomeViewController: UIViewController {
         
     }
     
+    
     //========================================
-    //MARK: - Loading Methods
+    //MARK: - Helper Methods
     //========================================
     
-    @objc private func loadingEvents() {
-        if dotOneImageView.image == UIImage(named: "DotFilled") {
-            resetDots()
-            dotTwoImageView.image = UIImage(named: "DotFilled")
-        } else if dotTwoImageView.image == UIImage(named: "DotFilled") {
-            resetDots()
-            dotThreeImageView.image = UIImage(named: "DotFilled")
-        } else if dotThreeImageView.image == UIImage(named: "DotFilled") {
-            resetDots()
-            dotOneImageView.image = UIImage(named: "DotFilled")
+    private func startLoadingEvents() {
+        //Setting up all things related to loading
+        self.eventTitleLabel.text = "Loading Events"
+        self.loadingActivityIndicator.alpha = 1.0
+        self.eventDescriptionLabel.alpha = 0.0
+        
+        //Starting activity Indicator
+        self.loadingActivityIndicator.startAnimating()
+        
+        //Setting variable for grabbing events
+        let eventorController = EventorController.shared
+        
+        //Grabbing Events from the API
+        eventorController.grabEvents { (events) in
+            guard let events = events else { return }
+            eventorController.setEvents(events: events)
+            let currentEvent = eventorController.getCurrentEvent()!
+            DispatchQueue.main.async {
+                self.eventTitleLabel.text = currentEvent.title
+                self.eventDescriptionLabel.text = currentEvent.eventDescription
+                self.eventDescriptionLabel.alpha = 1.0
+                self.loadingActivityIndicator.alpha = 0.0
+                self.loadingActivityIndicator.stopAnimating()
+                self.eventView.isUserInteractionEnabled = true
+            }
         }
     }
     
-    private func runTimer() {
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(loadingEvents), userInfo: nil, repeats: true)
-    }
-    
-    private func resetDots() {
-        dotOneImageView.image = UIImage(named: "Dot")
-        dotTwoImageView.image = UIImage(named: "Dot")
-        dotThreeImageView.image = UIImage(named: "Dot")
+    private func postSwipeSetUp() {
+        //Setting up pre-animation scale, location, and alpha
+        self.eventView.center = CGPoint(x: self.view.center.x, y: self.view.center.y)
+        self.eventView.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        self.eventView.layer.shadowPath = UIBezierPath(roundedRect: self.eventView.frame, cornerRadius: self.eventView.layer.cornerRadius).cgPath
+        self.eventView.layer.shadowOpacity = 0
+        self.thumbImageView.alpha = 0
+        
+        //Setting up constraints and recognizers if needed
+        if self.eventViewTapped {
+            NSLayoutConstraint.deactivate([self.eventViewTopSpaceConstraint, self.eventViewBottomSpaceConstraint])
+            NSLayoutConstraint.activate([self.eventViewHeightConstraint, self.eventDescriptionHeightConstraint])
+            self.eventViewLeadingConstraint.constant = 67.5
+            self.eventViewTrailingConstraint.constant = 67.5
+            self.eventViewRecognizer.isEnabled = true
+            self.homeViewRecognizer.isEnabled = false
+            self.eventScrollView.isUserInteractionEnabled = false
+        }
     }
     
     //========================================
