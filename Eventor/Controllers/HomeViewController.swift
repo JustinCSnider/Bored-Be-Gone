@@ -81,7 +81,6 @@ class HomeViewController: UIViewController {
             //Animating shadowPath to new eventView location
             animateShadowPath(withDuration: 0.5, for: eventView, shadowOpacity: nil, shadowOpacityDuration: nil)
             
-            //Setting
             eventViewRecognizer.isEnabled = true
             homeViewRecognizer.isEnabled = false
             eventScrollView.isUserInteractionEnabled = false
@@ -227,22 +226,27 @@ class HomeViewController: UIViewController {
         //Starting activity Indicator
         self.loadingActivityIndicator.startAnimating()
         
-        //Setting variable for grabbing events
+        //Setting up variables for grabbing events
         let eventorController = EventorController.shared
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM d', at 'h:mm a"
         
         //Grabbing Events from the API
         eventorController.grabEvents { (events) in
             guard let events = events else { return }
             eventorController.setEvents(events: events)
             let currentEvent = eventorController.getCurrentEvent()!
-            DispatchQueue.main.async {
-                self.eventTitleLabel.text = currentEvent.title
-                self.eventDescriptionLabel.text = currentEvent.eventDescription
-                self.eventDescriptionLabel.alpha = 1.0
-                self.loadingActivityIndicator.alpha = 0.0
-                self.loadingActivityIndicator.stopAnimating()
-                self.eventView.isUserInteractionEnabled = true
-            }
+            eventorController.getAddressFromLatLon(withLatitude: currentEvent.latitude, andLongitude: currentEvent.longitude, completion: { (location) in
+                let date = dateFormatter.string(from: currentEvent.startTime)
+                DispatchQueue.main.async {
+                    self.eventTitleLabel.text = currentEvent.title
+                    self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(location) \n\n\(currentEvent.eventDescription)"
+                    self.eventDescriptionLabel.alpha = 1.0
+                    self.loadingActivityIndicator.alpha = 0.0
+                    self.loadingActivityIndicator.stopAnimating()
+                    self.eventView.isUserInteractionEnabled = true
+                }
+            })
         }
     }
     
