@@ -14,6 +14,7 @@
 		CC017BCE2211DFB10036ADAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC017BCC2211DFB10036ADAC /* LaunchScreen.storyboard */; };
 		CC017BDA2211E4240036ADAC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC017BD82211E4240036ADAC /* Model.xcdatamodeld */; };
 		CC017BDC2211E4390036ADAC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC017BDB2211E4390036ADAC /* CoreDataStack.swift */; };
+		CC0F48F32215B7D400464692 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F48F22215B7D400464692 /* EventView.swift */; };
 		CC9F4E16221333D700A39EEF /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E15221333D700A39EEF /* FiltersViewController.swift */; };
 		CC9F4E18221333F400A39EEF /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E17221333F400A39EEF /* FavoritesViewController.swift */; };
 		CC9F4E1A2213350100A39EEF /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E192213350100A39EEF /* NetworkController.swift */; };
@@ -31,6 +32,7 @@
 		CC017BCF2211DFB10036ADAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC017BD92211E4240036ADAC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CC017BDB2211E4390036ADAC /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CC0F48F22215B7D400464692 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		CC9F4E15221333D700A39EEF /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		CC9F4E17221333F400A39EEF /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		CC9F4E192213350100A39EEF /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
@@ -105,8 +107,17 @@
 				CC017BC72211DFB00036ADAC /* Main.storyboard */,
 				CC017BCC2211DFB10036ADAC /* LaunchScreen.storyboard */,
 				CC017BCA2211DFB10036ADAC /* Assets.xcassets */,
+				CC0F48F12215B79200464692 /* UIDesign */,
 			);
 			path = "Views and Assets";
+			sourceTree = "<group>";
+		};
+		CC0F48F12215B79200464692 /* UIDesign */ = {
+			isa = PBXGroup;
+			children = (
+				CC0F48F22215B7D400464692 /* EventView.swift */,
+			);
+			path = UIDesign;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +200,7 @@
 				CC9F4E18221333F400A39EEF /* FavoritesViewController.swift in Sources */,
 				CC9F4E1A2213350100A39EEF /* NetworkController.swift in Sources */,
 				CC9F4E16221333D700A39EEF /* FiltersViewController.swift in Sources */,
+				CC0F48F32215B7D400464692 /* EventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,7 +355,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Eventor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -360,7 +372,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Eventor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

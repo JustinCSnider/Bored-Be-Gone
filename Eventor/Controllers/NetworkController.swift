@@ -15,7 +15,7 @@ struct NetworkController {
         var request = URLRequest(url: url)
         
         if let accessToken = accessToken {
-            request.setValue(accessToken, forHTTPHeaderField: "Authorization")
+            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         }
         
         let dataTask = URLSession.shared.dataTask(with: request) { (data, response, error) in

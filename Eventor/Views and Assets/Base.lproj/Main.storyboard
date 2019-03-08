@@ -33,12 +33,128 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qBQ-9p-Pvb" customClass="EventView" customModule="Eventor" customModuleProvider="target">
+                                <rect key="frame" x="67.5" y="246" width="240" height="175"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="e6k-Ho-LSq">
+                                        <rect key="frame" x="110" y="102.5" width="20" height="20"/>
+                                    </activityIndicatorView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Loading Events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnu-t4-DRP">
+                                        <rect key="frame" x="8" y="0.0" width="222" height="62.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="62.5" id="RiE-ya-4S9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ThumbUp" translatesAutoresizingMaskIntoConstraints="NO" id="nYh-0n-u2J">
+                                        <rect key="frame" x="82.5" y="50" width="75" height="75"/>
+                                    </imageView>
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdT-t8-Uhd">
+                                        <rect key="frame" x="0.0" y="62.5" width="240" height="112.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude Dude dude dude" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zJ-yy-7GO">
+                                                <rect key="frame" x="8" y="0.0" width="210" height="107.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="107.5" id="2eo-sK-v9h"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="5zJ-yy-7GO" firstAttribute="top" secondItem="BdT-t8-Uhd" secondAttribute="top" id="8Sp-NM-MU8"/>
+                                            <constraint firstAttribute="trailing" secondItem="5zJ-yy-7GO" secondAttribute="trailing" constant="22" id="Bg4-9u-LRd"/>
+                                            <constraint firstAttribute="bottom" secondItem="5zJ-yy-7GO" secondAttribute="bottom" id="oXZ-5z-OJ6"/>
+                                            <constraint firstItem="5zJ-yy-7GO" firstAttribute="leading" secondItem="BdT-t8-Uhd" secondAttribute="leading" constant="8" id="udd-T9-JmY"/>
+                                        </constraints>
+                                    </scrollView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="e6k-Ho-LSq" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="A8c-dP-JXf"/>
+                                    <constraint firstItem="fnu-t4-DRP" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" constant="8" id="Hk9-Sx-Fhq"/>
+                                    <constraint firstItem="nYh-0n-u2J" firstAttribute="centerY" secondItem="qBQ-9p-Pvb" secondAttribute="centerY" id="J1G-Mb-HAP"/>
+                                    <constraint firstAttribute="height" constant="175" id="Jhc-xk-unz"/>
+                                    <constraint firstItem="nYh-0n-u2J" firstAttribute="centerX" secondItem="qBQ-9p-Pvb" secondAttribute="centerX" id="MHV-4A-fjC"/>
+                                    <constraint firstAttribute="trailing" secondItem="fnu-t4-DRP" secondAttribute="trailing" constant="10" id="PMc-yE-rhK"/>
+                                    <constraint firstItem="BdT-t8-Uhd" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" id="aEy-RV-jdy"/>
+                                    <constraint firstItem="5zJ-yy-7GO" firstAttribute="width" secondItem="qBQ-9p-Pvb" secondAttribute="width" constant="-30" id="cqy-XQ-XPc"/>
+                                    <constraint firstAttribute="bottom" secondItem="BdT-t8-Uhd" secondAttribute="bottom" id="eCU-Ar-rgo"/>
+                                    <constraint firstItem="fnu-t4-DRP" firstAttribute="top" secondItem="qBQ-9p-Pvb" secondAttribute="top" id="h4b-Po-d3t"/>
+                                    <constraint firstItem="e6k-Ho-LSq" firstAttribute="top" secondItem="fnu-t4-DRP" secondAttribute="bottom" constant="40" id="sHf-QP-F5N"/>
+                                    <constraint firstAttribute="trailing" secondItem="BdT-t8-Uhd" secondAttribute="trailing" id="sRi-MG-Laj"/>
+                                    <constraint firstItem="BdT-t8-Uhd" firstAttribute="leading" secondItem="qBQ-9p-Pvb" secondAttribute="leading" id="vOr-Li-rJI"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="10" height="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="VpD-Td-uMb" appends="YES" id="wAq-Rq-Rsn"/>
+                                    <outletCollection property="gestureRecognizers" destination="Eo6-k3-doq" appends="YES" id="DUD-kN-X2J"/>
+                                </connections>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qBQ-9p-Pvb" secondAttribute="trailing" constant="67.5" id="Ggl-oU-fNt"/>
+                            <constraint firstItem="qBQ-9p-Pvb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67.5" id="H38-sH-YfD"/>
+                            <constraint firstItem="qBQ-9p-Pvb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="McZ-3c-cSu"/>
+                            <constraint firstItem="qBQ-9p-Pvb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Tyi-YQ-mSV"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="1aX-zN-xE1" appends="YES" id="d5E-LF-tw8"/>
+                        </connections>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="Home" selectedImage="HomeFilled" id="C45-L8-X9A"/>
+                    <connections>
+                        <outlet property="eventDescriptionHeightConstraint" destination="2eo-sK-v9h" id="Eix-09-AmF"/>
+                        <outlet property="eventDescriptionLabel" destination="5zJ-yy-7GO" id="wVw-9N-Jpf"/>
+                        <outlet property="eventScrollView" destination="BdT-t8-Uhd" id="Kge-Gj-Zks"/>
+                        <outlet property="eventTitleLabel" destination="fnu-t4-DRP" id="Ock-7t-ZWY"/>
+                        <outlet property="eventView" destination="qBQ-9p-Pvb" id="5Gc-by-vWr"/>
+                        <outlet property="eventViewHeightConstraint" destination="Jhc-xk-unz" id="asC-gE-Wtp"/>
+                        <outlet property="eventViewLeadingConstraint" destination="H38-sH-YfD" id="IQe-QR-7kd"/>
+                        <outlet property="eventViewRecognizer" destination="VpD-Td-uMb" id="Moq-Ty-Ihh"/>
+                        <outlet property="eventViewTrailingConstraint" destination="Ggl-oU-fNt" id="mDJ-J4-xng"/>
+                        <outlet property="homeViewRecognizer" destination="1aX-zN-xE1" id="Q6v-Wu-X0I"/>
+                        <outlet property="loadingActivityIndicator" destination="e6k-Ho-LSq" id="JKz-JM-gPf"/>
+                        <outlet property="thumbImageView" destination="nYh-0n-u2J" id="kTL-1Y-3ZP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="VpD-Td-uMb">
+                    <connections>
+                        <action selector="viewTapped:" destination="BYZ-38-t0r" id="ybY-Ql-6xO"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <tapGestureRecognizer enabled="NO" id="1aX-zN-xE1">
+                    <connections>
+                        <action selector="viewTapped:" destination="BYZ-38-t0r" id="dFO-LP-cgj"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="Eo6-k3-doq">
+                    <connections>
+                        <action selector="panEventView:" destination="BYZ-38-t0r" id="YrW-RI-RGF"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1076" y="132.68365817091455"/>
         </scene>
@@ -86,5 +202,6 @@
         <image name="HomeFilled" width="18.75" height="18.75"/>
         <image name="Slider" width="18.75" height="18.75"/>
         <image name="SliderFilled" width="18.75" height="18.75"/>
+        <image name="ThumbUp" width="75" height="75"/>
     </resources>
 </document>
