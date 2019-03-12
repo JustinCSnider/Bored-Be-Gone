@@ -17,6 +17,7 @@ class EventorController {
     
     static var shared = EventorController()
     private var events = [Event]()
+    private var likedEvents = [Event]()
     private var currentEvent = Event()
     private var currentEventIndex = 0
     private var currentURLString = "https://api.predicthq.com/v1/events/"
@@ -67,7 +68,13 @@ class EventorController {
     //MARK: - Getters and Setters
     //========================================
     
+    //Current event methods
+    
     func getCurrentEvent() -> Event? {
+        return currentEvent
+    }
+    
+    func getNextEvent() -> Event? {
         if (currentEventIndex + 1) > events.count {
             currentEventIndex = 0
             return nil
@@ -77,12 +84,30 @@ class EventorController {
         return currentEvent
     }
     
+    //General events methods
+    
     func setEvents(events: [Event]) {
         self.events = events
     }
     
     func getEvents() -> [Event] {
         return events
+    }
+    
+    //Liked events methods
+    
+    func addLikedEvent(event: Event) {
+        likedEvents.append(event)
+    }
+    
+    func removeLikedEvent(event: Event) {
+        if let eventIndex = likedEvents.firstIndex(of: event) {
+            likedEvents.remove(at: eventIndex)
+        }
+    }
+    
+    func getLikedEvents() -> [Event] {
+        return likedEvents
     }
     
     //========================================

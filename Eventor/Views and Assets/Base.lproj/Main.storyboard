@@ -10,21 +10,50 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Favorites View Controller-->
-        <scene sceneID="46T-DZ-c78">
+        <!--Liked Table View Controller-->
+        <scene sceneID="pcL-og-23u">
             <objects>
-                <viewController id="SuD-bI-Kui" customClass="FavoritesViewController" customModule="Eventor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="E2w-Pv-vbN">
+                <tableViewController id="Rnk-8W-YRz" customClass="LikedTableViewController" customModule="Eventor" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="y2J-ea-PD8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="T8f-RJ-IXl"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="Heart" selectedImage="HeartFilled" id="eLA-aZ-ovC"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hjn-aA-JoO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="likedCellIdentifier" textLabel="apo-DT-maE" detailTextLabel="Qk4-25-41J" rowHeight="65" style="IBUITableViewCellStyleSubtitle" id="yll-Dp-7ig">
+                                <rect key="frame" x="0.0" y="28" width="375" height="65"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yll-Dp-7ig" id="cll-6c-Oqa">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="apo-DT-maE">
+                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qk4-25-41J">
+                                            <rect key="frame" x="16" y="35.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Rnk-8W-YRz" id="IYp-yC-5uE"/>
+                            <outlet property="delegate" destination="Rnk-8W-YRz" id="7cI-4B-Zhk"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="" image="Heart" selectedImage="HeartFilled" id="ax0-1v-wiY"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tkn-Rj-ywm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="-590"/>
+            <point key="canvasLocation" x="1076" y="-717.39130434782612"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -187,7 +216,7 @@
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="SnN-3k-Swl"/>
                         <segue destination="7Hk-2Q-e6b" kind="relationship" relationship="viewControllers" id="QVg-wc-btE"/>
-                        <segue destination="SuD-bI-Kui" kind="relationship" relationship="viewControllers" id="AiO-Mi-nvQ"/>
+                        <segue destination="Rnk-8W-YRz" kind="relationship" relationship="viewControllers" id="Ivm-aR-gB4"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tsj-ds-px3" userLabel="First Responder" sceneMemberID="firstResponder"/>
