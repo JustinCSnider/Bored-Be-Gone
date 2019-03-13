@@ -15,6 +15,7 @@ class Event: NSManagedObject, Decodable {
     @NSManaged var startTime: Date
     @NSManaged var latitude: Double
     @NSManaged var longitude: Double
+    @NSManaged var location: String
     
     static var entityName: String { return "Event" }
     
@@ -34,6 +35,7 @@ class Event: NSManagedObject, Decodable {
         self.startTime = try valueContainer.decode(Date.self, forKey: CodingKeys.startTime)
         self.longitude = location[0]
         self.latitude = location[1]
+        self.location = ""
     }
 }
 

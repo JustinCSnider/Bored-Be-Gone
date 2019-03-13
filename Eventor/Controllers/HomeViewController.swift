@@ -122,9 +122,17 @@ class HomeViewController: UIViewController {
                     
                     //Setting event view up for new event
                     let eventorController = EventorController.shared
-                    if let currentEvent = eventorController.getCurrentEvent() {
-                        self.eventTitleLabel.text = currentEvent.title
-                        self.eventDescriptionLabel.text = currentEvent.eventDescription
+                    if let nextEvent = eventorController.getNextEvent() {
+                        //Setting up date formatter
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MMMM d', at 'h:mm a"
+                        
+                        //Setting up date string
+                        let date = dateFormatter.string(from: nextEvent.startTime)
+                        
+                        //Setting up labels
+                        self.eventTitleLabel.text = nextEvent.title
+                        self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(nextEvent.location) \n\n\(nextEvent.eventDescription)"
                     } else {
                         //Grabbing events and showing loading animations
                         self.startLoadingEvents()
@@ -152,11 +160,22 @@ class HomeViewController: UIViewController {
                     //Setting event view up for animation 
                     self.postSwipeSetUp()
                     
-                    //Setting event view up for new event
+                    //Adding current event to the likedTableViewController
                     let eventorController = EventorController.shared
-                    if let currentEvent = eventorController.getCurrentEvent() {
-                        self.eventTitleLabel.text = currentEvent.title
-                        self.eventDescriptionLabel.text = currentEvent.eventDescription
+                    eventorController.addLikedEvent(event: eventorController.getCurrentEvent()!)
+                    
+                    //Setting event view up for new event
+                    if let nextEvent = eventorController.getNextEvent() {
+                        //Setting up date formatter
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MMMM d', at 'h:mm a"
+                        
+                        //Setting up date string
+                        let date = dateFormatter.string(from: nextEvent.startTime)
+                        
+                        //Setting up labels
+                        self.eventTitleLabel.text = nextEvent.title
+                        self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(nextEvent.location) \n\n\(nextEvent.eventDescription)"
                     } else {
                         //Grabbing events and showing loading animations
                         self.startLoadingEvents()
@@ -235,18 +254,16 @@ class HomeViewController: UIViewController {
         eventorController.grabEvents { (events) in
             guard let events = events else { return }
             eventorController.setEvents(events: events)
-            let currentEvent = eventorController.getCurrentEvent()!
-            eventorController.getAddressFromLatLon(withLatitude: currentEvent.latitude, andLongitude: currentEvent.longitude, completion: { (location) in
-                let date = dateFormatter.string(from: currentEvent.startTime)
-                DispatchQueue.main.async {
-                    self.eventTitleLabel.text = currentEvent.title
-                    self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(location) \n\n\(currentEvent.eventDescription)"
-                    self.eventDescriptionLabel.alpha = 1.0
-                    self.loadingActivityIndicator.alpha = 0.0
-                    self.loadingActivityIndicator.stopAnimating()
-                    self.eventView.isUserInteractionEnabled = true
-                }
-            })
+            let nextEvent = eventorController.getNextEvent()!
+            let date = dateFormatter.string(from: nextEvent.startTime)
+            DispatchQueue.main.async {
+                self.eventTitleLabel.text = nextEvent.title
+                self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(nextEvent.location) \n\n\(nextEvent.eventDescription)"
+                self.eventDescriptionLabel.alpha = 1.0
+                self.loadingActivityIndicator.alpha = 0.0
+                self.loadingActivityIndicator.stopAnimating()
+                self.eventView.isUserInteractionEnabled = true
+            }
         }
     }
     
@@ -325,6 +342,8 @@ class HomeViewController: UIViewController {
     }
 }
 
+
+//Used to add a border line to any side of a label
 extension UILabel {
     
     enum ViewSide {

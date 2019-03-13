@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import Network
 
 class EventorController {
     
@@ -17,6 +18,7 @@ class EventorController {
     
     static var shared = EventorController()
     private var events = [Event]()
+    private var likedEvents = [Event]()
     private var currentEvent = Event()
     private var currentEventIndex = 0
     private var currentURLString = "https://api.predicthq.com/v1/events/"
@@ -35,6 +37,7 @@ class EventorController {
             guard let data = data else { return }
             
             let decoder = JSONDecoder()
+            let group = DispatchGroup()
             var results = [Event]()
             
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
@@ -52,6 +55,13 @@ class EventorController {
                 for i in descriptEvents {
                     if i.eventDescription == "", let eventIndex = descriptEvents.firstIndex(of: i) {
                         descriptEvents.remove(at: eventIndex)
+                    } else {
+                        group.enter()
+                        self.getAddressFromLatLon(withLatitude: i.latitude, andLongitude: i.longitude, completion: { (location) in
+                            i.location = location
+                            group.leave()
+                        })
+                        group.wait()
                     }
                 }
                 results = descriptEvents
@@ -67,7 +77,13 @@ class EventorController {
     //MARK: - Getters and Setters
     //========================================
     
+    //Current event methods
+    
     func getCurrentEvent() -> Event? {
+        return currentEvent
+    }
+    
+    func getNextEvent() -> Event? {
         if (currentEventIndex + 1) > events.count {
             currentEventIndex = 0
             return nil
@@ -77,12 +93,30 @@ class EventorController {
         return currentEvent
     }
     
+    //General events methods
+    
     func setEvents(events: [Event]) {
         self.events = events
     }
     
     func getEvents() -> [Event] {
         return events
+    }
+    
+    //Liked events methods
+    
+    func addLikedEvent(event: Event) {
+        likedEvents.append(event)
+    }
+    
+    func removeLikedEvent(event: Event) {
+        if let eventIndex = likedEvents.firstIndex(of: event) {
+            likedEvents.remove(at: eventIndex)
+        }
+    }
+    
+    func getLikedEvents() -> [Event] {
+        return likedEvents
     }
     
     //========================================
