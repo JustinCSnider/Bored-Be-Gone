@@ -16,6 +16,10 @@ class LikedTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
@@ -50,6 +54,18 @@ class LikedTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    //========================================
+    //MARK: - Navigation methods
+    //========================================
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let destination = segue.destination as? DetailViewController, let selectedEventIndex = tableView.indexPathForSelectedRow?.row {
+            let selectedEvent = EventorController.shared.getLikedEvents()[selectedEventIndex]
+            destination.selectedEvent = selectedEvent
         }
     }
 

@@ -15,6 +15,7 @@
 		CC017BDA2211E4240036ADAC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC017BD82211E4240036ADAC /* Model.xcdatamodeld */; };
 		CC017BDC2211E4390036ADAC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC017BDB2211E4390036ADAC /* CoreDataStack.swift */; };
 		CC0AB3762237F0BF005F7C0E /* LikedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AB3752237F0BF005F7C0E /* LikedTableViewController.swift */; };
+		CC0AB37822380385005F7C0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AB37722380385005F7C0E /* DetailViewController.swift */; };
 		CC0F48F32215B7D400464692 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F48F22215B7D400464692 /* EventView.swift */; };
 		CC9F4E16221333D700A39EEF /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E15221333D700A39EEF /* FiltersViewController.swift */; };
 		CC9F4E1A2213350100A39EEF /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E192213350100A39EEF /* NetworkController.swift */; };
@@ -33,6 +34,7 @@
 		CC017BD92211E4240036ADAC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CC017BDB2211E4390036ADAC /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		CC0AB3752237F0BF005F7C0E /* LikedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedTableViewController.swift; sourceTree = "<group>"; };
+		CC0AB37722380385005F7C0E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		CC0F48F22215B7D400464692 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		CC9F4E15221333D700A39EEF /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		CC9F4E192213350100A39EEF /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 				CC0AB3752237F0BF005F7C0E /* LikedTableViewController.swift */,
 				CC9F4E192213350100A39EEF /* NetworkController.swift */,
 				CC9F4E1B2213352300A39EEF /* EventorController.swift */,
+				CC0AB37722380385005F7C0E /* DetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC0AB37822380385005F7C0E /* DetailViewController.swift in Sources */,
 				CC017BDC2211E4390036ADAC /* CoreDataStack.swift in Sources */,
 				CCF3136D221488400097115E /* Event.swift in Sources */,
 				CC9F4E1C2213352300A39EEF /* EventorController.swift in Sources */,

@@ -123,8 +123,16 @@ class HomeViewController: UIViewController {
                     //Setting event view up for new event
                     let eventorController = EventorController.shared
                     if let nextEvent = eventorController.getNextEvent() {
+                        //Setting up date formatter
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MMMM d', at 'h:mm a"
+                        
+                        //Setting up date string
+                        let date = dateFormatter.string(from: nextEvent.startTime)
+                        
+                        //Setting up labels
                         self.eventTitleLabel.text = nextEvent.title
-                        self.eventDescriptionLabel.text = nextEvent.eventDescription
+                        self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(nextEvent.location) \n\n\(nextEvent.eventDescription)"
                     } else {
                         //Grabbing events and showing loading animations
                         self.startLoadingEvents()
@@ -158,8 +166,16 @@ class HomeViewController: UIViewController {
                     
                     //Setting event view up for new event
                     if let nextEvent = eventorController.getNextEvent() {
+                        //Setting up date formatter
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "MMMM d', at 'h:mm a"
+                        
+                        //Setting up date string
+                        let date = dateFormatter.string(from: nextEvent.startTime)
+                        
+                        //Setting up labels
                         self.eventTitleLabel.text = nextEvent.title
-                        self.eventDescriptionLabel.text = nextEvent.eventDescription
+                        self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(nextEvent.location) \n\n\(nextEvent.eventDescription)"
                     } else {
                         //Grabbing events and showing loading animations
                         self.startLoadingEvents()
@@ -239,17 +255,15 @@ class HomeViewController: UIViewController {
             guard let events = events else { return }
             eventorController.setEvents(events: events)
             let nextEvent = eventorController.getNextEvent()!
-            eventorController.getAddressFromLatLon(withLatitude: nextEvent.latitude, andLongitude: nextEvent.longitude, completion: { (location) in
-                let date = dateFormatter.string(from: nextEvent.startTime)
-                DispatchQueue.main.async {
-                    self.eventTitleLabel.text = nextEvent.title
-                    self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(location) \n\n\(nextEvent.eventDescription)"
-                    self.eventDescriptionLabel.alpha = 1.0
-                    self.loadingActivityIndicator.alpha = 0.0
-                    self.loadingActivityIndicator.stopAnimating()
-                    self.eventView.isUserInteractionEnabled = true
-                }
-            })
+            let date = dateFormatter.string(from: nextEvent.startTime)
+            DispatchQueue.main.async {
+                self.eventTitleLabel.text = nextEvent.title
+                self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(nextEvent.location) \n\n\(nextEvent.eventDescription)"
+                self.eventDescriptionLabel.alpha = 1.0
+                self.loadingActivityIndicator.alpha = 0.0
+                self.loadingActivityIndicator.stopAnimating()
+                self.eventView.isUserInteractionEnabled = true
+            }
         }
     }
     

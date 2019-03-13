@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import Network
 
 class EventorController {
     
@@ -36,6 +37,7 @@ class EventorController {
             guard let data = data else { return }
             
             let decoder = JSONDecoder()
+            let group = DispatchGroup()
             var results = [Event]()
             
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
@@ -53,6 +55,13 @@ class EventorController {
                 for i in descriptEvents {
                     if i.eventDescription == "", let eventIndex = descriptEvents.firstIndex(of: i) {
                         descriptEvents.remove(at: eventIndex)
+                    } else {
+                        group.enter()
+                        self.getAddressFromLatLon(withLatitude: i.latitude, andLongitude: i.longitude, completion: { (location) in
+                            i.location = location
+                            group.leave()
+                        })
+                        group.wait()
                     }
                 }
                 results = descriptEvents
