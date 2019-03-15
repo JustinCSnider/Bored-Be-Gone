@@ -217,6 +217,9 @@ class HomeViewController: UIViewController {
         //Setting divisor for animations
         divisor = (view.frame.width / 2) / 0.61
         
+        //Fetching Liked Events
+        EventorController.shared.fetchLikedEvents()
+        
         //Grabbing events and showing loading animations
         startLoadingEvents()
     }

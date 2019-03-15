@@ -9,6 +9,7 @@
 import Foundation
 import CoreLocation
 import Network
+import CoreData
 
 class EventorController {
     
@@ -17,9 +18,9 @@ class EventorController {
     //========================================
     
     static var shared = EventorController()
-    private var events = [Event]()
-    private var likedEvents = [Event]()
-    private var currentEvent = Event()
+    private var events: [Event] = []
+    private var likedEvents: [Event] = []
+    private var currentEvent: Event?
     private var currentEventIndex = 0
     private var currentURLString = "https://api.predicthq.com/v1/events/"
     
@@ -55,6 +56,7 @@ class EventorController {
                 for i in descriptEvents {
                     if i.eventDescription == "", let eventIndex = descriptEvents.firstIndex(of: i) {
                         descriptEvents.remove(at: eventIndex)
+                        Stack.context.delete(i)
                     } else {
                         group.enter()
                         self.getAddressFromLatLon(withLatitude: i.latitude, andLongitude: i.longitude, completion: { (location) in
@@ -101,6 +103,23 @@ class EventorController {
     
     func getEvents() -> [Event] {
         return events
+    }
+    
+    func resetEvents() {
+        for i in events {
+            var eventIsPresent = false
+            //Checks if any events in the events array are liked events
+            for j in likedEvents {
+                if i == j {
+                    eventIsPresent = true
+                }
+            }
+            //If an event in the events array is a liked event then it isn't deleted off the context
+            if !eventIsPresent {
+                Stack.context.delete(i)
+            }
+        }
+        events.removeAll()
     }
     
     //Liked events methods
@@ -174,6 +193,16 @@ class EventorController {
             try Stack.context.save()
         } catch {
             Stack.context.rollback()
+        }
+    }
+    
+    func fetchLikedEvents() {
+        let eventFetchRequest = NSFetchRequest<Event>(entityName: Event.entityName)
+        
+        do {
+            self.likedEvents = try Stack.context.fetch(eventFetchRequest)
+        } catch {
+            print("Unable to fetch data from the context")
         }
     }
 }

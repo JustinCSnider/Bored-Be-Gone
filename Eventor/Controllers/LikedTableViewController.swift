@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class LikedTableViewController: UITableViewController {
     
@@ -52,7 +53,10 @@ class LikedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
+            let eventorController = EventorController.shared
+            
+            Stack.context.delete(eventorController.getLikedEvents()[indexPath.row])
+            EventorController.shared.removeLikedEvent(event: eventorController.getLikedEvents()[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }

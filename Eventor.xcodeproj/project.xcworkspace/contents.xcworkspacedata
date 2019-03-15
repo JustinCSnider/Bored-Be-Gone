@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:BoredBeGone.xcodeproj">
+      location = "self:/Users/justinsnider/Desktop/Playgrounds/Eventor/Eventor.xcodeproj">
    </FileRef>
 </Workspace>
