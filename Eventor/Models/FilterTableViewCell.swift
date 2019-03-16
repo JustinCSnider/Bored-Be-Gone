@@ -1,0 +1,47 @@
+//
+//  FilterTableViewCell.swift
+//  Eventor
+//
+//  Created by Justin Snider on 3/15/19.
+//  Copyright © 2019 Justin Snider. All rights reserved.
+//
+
+import UIKit
+
+class FilterTableViewCell: UITableViewCell {
+    
+    //========================================
+    //MARK: - IBOutlets
+    //========================================
+    
+    @IBOutlet weak var categoryLabel: UILabel!
+    
+    //========================================
+    //MARK: - IBActions
+    //========================================
+    
+    @IBAction func filterSwitchTapped(_ sender: UISwitch) {
+        if sender.isOn == false {
+            categoryLabel.textColor = .lightGray
+        } else {
+            categoryLabel.textColor = .black
+        }
+    }
+    
+    
+    //========================================
+    //MARK: - Life Cycle Methods
+    //========================================
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+    }
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        // Configure the view for the selected state
+    }
+
+}

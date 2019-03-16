@@ -14,10 +14,14 @@
 		CC017BCE2211DFB10036ADAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC017BCC2211DFB10036ADAC /* LaunchScreen.storyboard */; };
 		CC017BDA2211E4240036ADAC /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC017BD82211E4240036ADAC /* Model.xcdatamodeld */; };
 		CC017BDC2211E4390036ADAC /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC017BDB2211E4390036ADAC /* CoreDataStack.swift */; };
+		CC064E51223C99A5006EBA8E /* FiltersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC064E50223C99A5006EBA8E /* FiltersTableViewController.swift */; };
+		CC064E57223CAE5A006EBA8E /* StateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC064E56223CAE5A006EBA8E /* StateTableViewCell.swift */; };
+		CC064E59223CB916006EBA8E /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC064E58223CB916006EBA8E /* FilterTableViewCell.swift */; };
+		CC064E5B223CBF1D006EBA8E /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC064E5A223CBF1D006EBA8E /* Categories.swift */; };
 		CC0AB3762237F0BF005F7C0E /* LikedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AB3752237F0BF005F7C0E /* LikedTableViewController.swift */; };
 		CC0AB37822380385005F7C0E /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0AB37722380385005F7C0E /* DetailViewController.swift */; };
+		CC0C2C3C223BFB6A00345685 /* FilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0C2C3B223BFB6900345685 /* FilterController.swift */; };
 		CC0F48F32215B7D400464692 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC0F48F22215B7D400464692 /* EventView.swift */; };
-		CC9F4E16221333D700A39EEF /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E15221333D700A39EEF /* FiltersViewController.swift */; };
 		CC9F4E1A2213350100A39EEF /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E192213350100A39EEF /* NetworkController.swift */; };
 		CC9F4E1C2213352300A39EEF /* EventorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9F4E1B2213352300A39EEF /* EventorController.swift */; };
 		CCF3136D221488400097115E /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF3136C221488400097115E /* Event.swift */; };
@@ -33,10 +37,14 @@
 		CC017BCF2211DFB10036ADAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC017BD92211E4240036ADAC /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		CC017BDB2211E4390036ADAC /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		CC064E50223C99A5006EBA8E /* FiltersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersTableViewController.swift; sourceTree = "<group>"; };
+		CC064E56223CAE5A006EBA8E /* StateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateTableViewCell.swift; sourceTree = "<group>"; };
+		CC064E58223CB916006EBA8E /* FilterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
+		CC064E5A223CBF1D006EBA8E /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		CC0AB3752237F0BF005F7C0E /* LikedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikedTableViewController.swift; sourceTree = "<group>"; };
 		CC0AB37722380385005F7C0E /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		CC0C2C3B223BFB6900345685 /* FilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterController.swift; sourceTree = "<group>"; };
 		CC0F48F22215B7D400464692 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
-		CC9F4E15221333D700A39EEF /* FiltersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		CC9F4E192213350100A39EEF /* NetworkController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkController.swift; sourceTree = "<group>"; };
 		CC9F4E1B2213352300A39EEF /* EventorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventorController.swift; sourceTree = "<group>"; };
 		CCF3136C221488400097115E /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -85,11 +93,11 @@
 		CC017BD52211E3A10036ADAC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				CC0AF9D0223C4460004D89F8 /* ModelControllers */,
 				CC017BC52211DFB00036ADAC /* HomeViewController.swift */,
-				CC9F4E15221333D700A39EEF /* FiltersViewController.swift */,
+				CC064E50223C99A5006EBA8E /* FiltersTableViewController.swift */,
 				CC0AB3752237F0BF005F7C0E /* LikedTableViewController.swift */,
 				CC9F4E192213350100A39EEF /* NetworkController.swift */,
-				CC9F4E1B2213352300A39EEF /* EventorController.swift */,
 				CC0AB37722380385005F7C0E /* DetailViewController.swift */,
 			);
 			path = Controllers;
@@ -100,6 +108,9 @@
 			children = (
 				CC017BD82211E4240036ADAC /* Model.xcdatamodeld */,
 				CCF3136C221488400097115E /* Event.swift */,
+				CC064E56223CAE5A006EBA8E /* StateTableViewCell.swift */,
+				CC064E58223CB916006EBA8E /* FilterTableViewCell.swift */,
+				CC064E5A223CBF1D006EBA8E /* Categories.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -113,6 +124,15 @@
 				CC0F48F12215B79200464692 /* UIDesign */,
 			);
 			path = "Views and Assets";
+			sourceTree = "<group>";
+		};
+		CC0AF9D0223C4460004D89F8 /* ModelControllers */ = {
+			isa = PBXGroup;
+			children = (
+				CC9F4E1B2213352300A39EEF /* EventorController.swift */,
+				CC0C2C3B223BFB6900345685 /* FilterController.swift */,
+			);
+			path = ModelControllers;
 			sourceTree = "<group>";
 		};
 		CC0F48F12215B79200464692 /* UIDesign */ = {
@@ -196,14 +216,18 @@
 			files = (
 				CC0AB37822380385005F7C0E /* DetailViewController.swift in Sources */,
 				CC017BDC2211E4390036ADAC /* CoreDataStack.swift in Sources */,
+				CC064E5B223CBF1D006EBA8E /* Categories.swift in Sources */,
 				CCF3136D221488400097115E /* Event.swift in Sources */,
+				CC0C2C3C223BFB6A00345685 /* FilterController.swift in Sources */,
+				CC064E57223CAE5A006EBA8E /* StateTableViewCell.swift in Sources */,
+				CC064E59223CB916006EBA8E /* FilterTableViewCell.swift in Sources */,
 				CC9F4E1C2213352300A39EEF /* EventorController.swift in Sources */,
 				CC0AB3762237F0BF005F7C0E /* LikedTableViewController.swift in Sources */,
+				CC064E51223C99A5006EBA8E /* FiltersTableViewController.swift in Sources */,
 				CC017BC62211DFB00036ADAC /* HomeViewController.swift in Sources */,
 				CC017BC42211DFB00036ADAC /* AppDelegate.swift in Sources */,
 				CC017BDA2211E4240036ADAC /* Model.xcdatamodeld in Sources */,
 				CC9F4E1A2213350100A39EEF /* NetworkController.swift in Sources */,
-				CC9F4E16221333D700A39EEF /* FiltersViewController.swift in Sources */,
 				CC0F48F32215B7D400464692 /* EventView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
