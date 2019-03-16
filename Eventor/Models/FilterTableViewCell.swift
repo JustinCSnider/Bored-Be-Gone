@@ -11,10 +11,17 @@ import UIKit
 class FilterTableViewCell: UITableViewCell {
     
     //========================================
+    //MARK: - Properties
+    //========================================
+    
+    var delegate: FilterSwitchDelegate?
+    
+    //========================================
     //MARK: - IBOutlets
     //========================================
     
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var filterSwitch: UISwitch!
     
     //========================================
     //MARK: - IBActions
@@ -26,6 +33,7 @@ class FilterTableViewCell: UITableViewCell {
         } else {
             categoryLabel.textColor = .black
         }
+        delegate?.createQuery()
     }
     
     

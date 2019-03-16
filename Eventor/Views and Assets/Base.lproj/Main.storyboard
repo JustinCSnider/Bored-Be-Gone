@@ -328,6 +328,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="categoryLabel" destination="of2-7i-2En" id="5Zg-Zy-5iK"/>
+                                    <outlet property="filterSwitch" destination="mAR-bq-B5G" id="Cch-9W-GiC"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>

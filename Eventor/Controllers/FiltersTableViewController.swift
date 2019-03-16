@@ -8,7 +8,11 @@
 
 import UIKit
 
-class FiltersTableViewController: UITableViewController {
+protocol FilterSwitchDelegate {
+    func createQuery() -> [String : String]
+}
+
+class FiltersTableViewController: UITableViewController, FilterSwitchDelegate {
     
     //========================================
     //MARK: - Properties
@@ -44,11 +48,10 @@ class FiltersTableViewController: UITableViewController {
             let filterCell = tableView.dequeueReusableCell(withIdentifier: "filterCell", for: indexPath) as! FilterTableViewCell
 
             filterCell.categoryLabel.text = FilterController.shared.categories[indexPath.row - 1]
+            filterCell.delegate = self
             
             cell = filterCell
         }
-
-        // Configure the cell...
 
         return cell
     }
@@ -78,8 +81,10 @@ class FiltersTableViewController: UITableViewController {
                 FilterController.shared.grabCategories((currentCell.stateLabel.text ?? "")) { (categories) in
                     guard let categories = categories else { return }
                     FilterController.shared.categories = categories
+                    
                     DispatchQueue.main.async {
                         tableView.reloadData()
+                        EventorController.shared.setQuery(self.createQuery())
                     }
                 }
             }
@@ -96,14 +101,38 @@ class FiltersTableViewController: UITableViewController {
             FilterController.shared.grabCategories((firstCell.stateLabel.text ?? "")) { (categories) in
                 guard let categories = categories else { return }
                 FilterController.shared.categories = categories
+                
                 DispatchQueue.main.async {
                     tableView.reloadData()
+                    EventorController.shared.setQuery(self.createQuery())
                 }
             }
             
             tableView.beginUpdates()
             tableView.endUpdates()
         }
+    }
+    
+    //========================================
+    //MARK: - Helper Methods
+    //========================================
+    
+    func createQuery() -> [String : String] {
+        var query = [
+            "region" : (tableView.visibleCells[0] as! StateTableViewCell).stateLabel.text ?? "",
+            "category" : ""
+        ]
+        
+        
+        for i in self.tableView.visibleCells {
+            if let currentCell = i as? FilterTableViewCell, currentCell.filterSwitch.isOn {
+                query["category"]?.append("\(currentCell.categoryLabel.text ?? ""),")
+            }
+        }
+        
+        query["category"]?.removeLast()
+        
+        return query
     }
 
 }

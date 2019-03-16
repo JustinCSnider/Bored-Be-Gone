@@ -23,13 +23,14 @@ class EventorController {
     private var currentEvent: Event?
     private var currentEventIndex = 0
     private var currentURLString = "https://api.predicthq.com/v1/events/"
+    private var searchQuery = [String : String]()
     
     //========================================
     //MARK: - Network Methods
     //========================================
     
     func grabEvents(completion: (([Event]?) -> Void)? = nil) {
-        guard let url = URL(string: currentURLString) else {
+        guard let url = URL(string: currentURLString)?.withQueries(searchQuery) else {
             print("Bad URL")
             return
         }
@@ -138,6 +139,12 @@ class EventorController {
         return likedEvents
     }
     
+    //Query methods
+    
+    func setQuery(_ query: [String : String]) {
+        self.searchQuery = query
+    }
+    
     //========================================
     //MARK: - Helper Methods
     //========================================
@@ -227,5 +234,15 @@ extension JSONDecoder.DateDecodingStrategy {
                                                    debugDescription: "Invalid date: " + string)
         }
         return date
+    }
+}
+
+extension URL {
+    
+    func withQueries(_ queries: [String: String]) -> URL? {
+        
+        var components = URLComponents(url: self, resolvingAgainstBaseURL: true)
+        components?.queryItems = queries.compactMap { URLQueryItem(name: $0.0, value: $0.1) }
+        return components?.url
     }
 }

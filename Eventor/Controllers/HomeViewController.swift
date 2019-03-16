@@ -219,9 +219,6 @@ class HomeViewController: UIViewController {
         
         //Fetching Liked Events
         EventorController.shared.fetchLikedEvents()
-        
-        //Grabbing events and showing loading animations
-        startLoadingEvents()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -231,6 +228,9 @@ class HomeViewController: UIViewController {
         if eventTitleLabel.layer.sublayers == nil {
             eventTitleLabel.addBorder(side: .Bottom, thickness: 2, color: UIColor.black)
         }
+        
+        //Grabbing events and showing loading animations
+        startLoadingEvents()
         
     }
     
