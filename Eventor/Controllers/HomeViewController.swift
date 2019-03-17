@@ -219,6 +219,9 @@ class HomeViewController: UIViewController {
         
         //Fetching Liked Events
         EventorController.shared.fetchLikedEvents()
+        
+        //Grabbing events and showing loading animations
+        startLoadingEvents()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -229,8 +232,11 @@ class HomeViewController: UIViewController {
             eventTitleLabel.addBorder(side: .Bottom, thickness: 2, color: UIColor.black)
         }
         
-        //Grabbing events and showing loading animations
-        startLoadingEvents()
+        //Grabbing events and showing loading animations if filters were changed
+        if FilterController.shared.filterPageUsed {
+            startLoadingEvents()
+            FilterController.shared.filterPageUsed = false
+        }
         
     }
     
@@ -255,7 +261,18 @@ class HomeViewController: UIViewController {
         
         //Grabbing Events from the API
         eventorController.grabEvents { (events) in
-            guard let events = events else { return }
+            guard let events = events else {
+                DispatchQueue.main.async {
+                    self.eventTitleLabel.text = "No more events available"
+                    self.eventDescriptionLabel.text = "Change your filters if you want to see more"
+                    self.eventDescriptionLabel.alpha = 1.0
+                    self.loadingActivityIndicator.alpha = 0.0
+                    self.loadingActivityIndicator.stopAnimating()
+                }
+                self.eventView.isUserInteractionEnabled = false
+    
+                return
+            }
             eventorController.setEvents(events: events)
             let nextEvent = eventorController.getNextEvent()!
             let date = dateFormatter.string(from: nextEvent.startTime)

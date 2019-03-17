@@ -16,6 +16,7 @@ struct FilterController {
     
     static var shared = FilterController()
     var categories = [String]()
+    var filterPageUsed = false
     let stateList: [String] = [
         "Alabama",
         "Alaska",

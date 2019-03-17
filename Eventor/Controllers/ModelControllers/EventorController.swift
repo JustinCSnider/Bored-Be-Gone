@@ -22,7 +22,7 @@ class EventorController {
     private var likedEvents: [Event] = []
     private var currentEvent: Event?
     private var currentEventIndex = 0
-    private var currentURLString = "https://api.predicthq.com/v1/events/"
+    private var currentURLString: String? = "https://api.predicthq.com/v1/events/"
     private var searchQuery = [String : String]()
     
     //========================================
@@ -30,7 +30,27 @@ class EventorController {
     //========================================
     
     func grabEvents(completion: (([Event]?) -> Void)? = nil) {
-        guard let url = URL(string: currentURLString)?.withQueries(searchQuery) else {
+        
+        if currentURLString != nil {
+            for i in searchQuery.keys {
+                if let searchQueryValue = searchQuery[i] {
+                    if currentURLString!.last == "/" {
+                        currentURLString!.append("?")
+                    } else {
+                        currentURLString?.append("&")
+                    }
+                    currentURLString!.append("\(i)=\(searchQueryValue)")
+                }
+            }
+        } else if let completion = completion {
+            completion(nil)
+            
+            currentURLString = "https://api.predicthq.com/v1/events/"
+            
+            return
+        }
+        
+        guard let url = URL(string: currentURLString!) else {
             print("Bad URL")
             return
         }
@@ -49,7 +69,7 @@ class EventorController {
                 if let nextURLString = events.next {
                     self.currentURLString = nextURLString
                 } else {
-                    self.currentURLString = "https://api.predicthq.com/v1/events/"
+                    self.currentURLString = nil
                 }
 
                 var descriptEvents = events.results
@@ -94,6 +114,10 @@ class EventorController {
         currentEvent = events[currentEventIndex]
         currentEventIndex += 1
         return currentEvent
+    }
+    
+    func resetCurrentEventIndex() {
+        currentEventIndex = 0
     }
     
     //General events methods
@@ -234,15 +258,5 @@ extension JSONDecoder.DateDecodingStrategy {
                                                    debugDescription: "Invalid date: " + string)
         }
         return date
-    }
-}
-
-extension URL {
-    
-    func withQueries(_ queries: [String: String]) -> URL? {
-        
-        var components = URLComponents(url: self, resolvingAgainstBaseURL: true)
-        components?.queryItems = queries.compactMap { URLQueryItem(name: $0.0, value: $0.1) }
-        return components?.url
     }
 }

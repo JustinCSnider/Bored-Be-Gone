@@ -86,6 +86,9 @@ class FiltersTableViewController: UITableViewController, FilterSwitchDelegate {
                         tableView.reloadData()
                         EventorController.shared.setQuery(self.createQuery())
                     }
+                    
+                    FilterController.shared.filterPageUsed = true
+                    EventorController.shared.resetCurrentEventIndex()
                 }
             }
             
@@ -106,6 +109,9 @@ class FiltersTableViewController: UITableViewController, FilterSwitchDelegate {
                     tableView.reloadData()
                     EventorController.shared.setQuery(self.createQuery())
                 }
+                
+                FilterController.shared.filterPageUsed = true
+                EventorController.shared.resetCurrentEventIndex()
             }
             
             tableView.beginUpdates()
