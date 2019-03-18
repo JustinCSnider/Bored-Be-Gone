@@ -22,14 +22,36 @@ class EventorController {
     private var likedEvents: [Event] = []
     private var currentEvent: Event?
     private var currentEventIndex = 0
-    private var currentURLString = "https://api.predicthq.com/v1/events/"
+    private var currentURLString: String? = "https://api.predicthq.com/v1/events/"
+    private var searchQuery = [String : String]()
     
     //========================================
     //MARK: - Network Methods
     //========================================
     
     func grabEvents(completion: (([Event]?) -> Void)? = nil) {
-        guard let url = URL(string: currentURLString) else {
+        
+        //Changes the outcome of the network request based on whether their is a next url or not
+        if currentURLString != nil {
+            for i in searchQuery.keys {
+                if let searchQueryValue = searchQuery[i] {
+                    if currentURLString!.last == "/" {
+                        currentURLString!.append("?")
+                    } else {
+                        currentURLString?.append("&")
+                    }
+                    currentURLString!.append("\(i)=\(searchQueryValue)")
+                }
+            }
+        } else if let completion = completion {
+            completion(nil)
+            
+            currentURLString = "https://api.predicthq.com/v1/events/"
+            
+            return
+        }
+        
+        guard let url = URL(string: currentURLString!) else {
             print("Bad URL")
             return
         }
@@ -37,10 +59,12 @@ class EventorController {
         NetworkController.performNetworkRequest(for: url, accessToken: "L3KQkKTpvMPFkoBaMhF1CcD5KCRiQ2") { (data, error) in
             guard let data = data else { return }
             
+            //Setting up variables for pulling events
             let decoder = JSONDecoder()
             let group = DispatchGroup()
             var results = [Event]()
             
+            //Used to get the start date of the events
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
             if let events = try? decoder.decode(Events.self, from: data) {
@@ -48,16 +72,18 @@ class EventorController {
                 if let nextURLString = events.next {
                     self.currentURLString = nextURLString
                 } else {
-                    self.currentURLString = "https://api.predicthq.com/v1/events/"
+                    self.currentURLString = nil
                 }
 
                 var descriptEvents = events.results
                 
+                //Only puts events that have descriptions in the events array
                 for i in descriptEvents {
                     if i.eventDescription == "", let eventIndex = descriptEvents.firstIndex(of: i) {
                         descriptEvents.remove(at: eventIndex)
                         Stack.context.delete(i)
                     } else {
+                        //Grabs locations for the events
                         group.enter()
                         self.getAddressFromLatLon(withLatitude: i.latitude, andLongitude: i.longitude, completion: { (location) in
                             i.location = location
@@ -93,6 +119,10 @@ class EventorController {
         currentEvent = events[currentEventIndex]
         currentEventIndex += 1
         return currentEvent
+    }
+    
+    func resetCurrentEventIndex() {
+        currentEventIndex = 0
     }
     
     //General events methods
@@ -136,6 +166,12 @@ class EventorController {
     
     func getLikedEvents() -> [Event] {
         return likedEvents
+    }
+    
+    //Query methods
+    
+    func setQuery(_ query: [String : String]) {
+        self.searchQuery = query
     }
     
     //========================================

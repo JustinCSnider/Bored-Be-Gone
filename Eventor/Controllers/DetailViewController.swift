@@ -41,6 +41,7 @@ class DetailViewController: UIViewController {
             //Setting up date formatter
             let date = dateFormatter.string(from: selectedEvent.startTime)
             
+            //Setting up views
             titleLabel.text = selectedEvent.title
             detailLabel.text = "Date: \(date) \nLocation: \(selectedEvent.location) \n\n\(selectedEvent.eventDescription)"
         }

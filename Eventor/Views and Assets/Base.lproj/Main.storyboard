@@ -247,21 +247,101 @@
             </objects>
             <point key="canvasLocation" x="1076" y="132.68365817091455"/>
         </scene>
-        <!--Filters View Controller-->
-        <scene sceneID="u6B-Lp-niN">
+        <!--Filters Table View Controller-->
+        <scene sceneID="51W-tc-gFl">
             <objects>
-                <viewController id="7Hk-2Q-e6b" customClass="FiltersViewController" customModule="Eventor" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4Z3-YM-spk">
+                <tableViewController id="9l9-dG-pTU" customClass="FiltersTableViewController" customModule="Eventor" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vFW-ES-X8M">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Cqg-jv-8Va"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="" image="Slider" selectedImage="SliderFilled" id="q3t-zD-WMf"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8ZC-aj-N6n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="stateCell" rowHeight="200" id="cZw-Dx-awi" customClass="StateTableViewCell" customModule="Eventor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cZw-Dx-awi" id="98g-RG-eV9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="199.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6P-oU-1dl">
+                                            <rect key="frame" x="16" y="11" width="71" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cex-Qf-EDF">
+                                            <rect key="frame" x="318.5" y="11" width="40.5" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n0g-mV-bDP">
+                                            <rect key="frame" x="0.0" y="32" width="375" height="165"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="165" id="Cg2-Q0-YGf"/>
+                                            </constraints>
+                                        </pickerView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Cex-Qf-EDF" firstAttribute="top" secondItem="98g-RG-eV9" secondAttribute="topMargin" id="0Iy-Wd-6Al"/>
+                                        <constraint firstItem="Cex-Qf-EDF" firstAttribute="trailing" secondItem="98g-RG-eV9" secondAttribute="trailingMargin" id="AMr-40-6ia"/>
+                                        <constraint firstItem="s6P-oU-1dl" firstAttribute="leading" secondItem="98g-RG-eV9" secondAttribute="leadingMargin" id="IWI-c5-9e9"/>
+                                        <constraint firstItem="s6P-oU-1dl" firstAttribute="top" secondItem="98g-RG-eV9" secondAttribute="topMargin" id="WIi-6Q-CaV"/>
+                                        <constraint firstAttribute="trailing" secondItem="n0g-mV-bDP" secondAttribute="trailing" id="k0i-bC-yA0"/>
+                                        <constraint firstItem="n0g-mV-bDP" firstAttribute="leading" secondItem="98g-RG-eV9" secondAttribute="leading" id="k1n-U8-1sy"/>
+                                        <constraint firstItem="n0g-mV-bDP" firstAttribute="top" secondItem="s6P-oU-1dl" secondAttribute="bottom" id="ogT-kB-bAY"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="stateLabel" destination="Cex-Qf-EDF" id="PuC-VB-euZ"/>
+                                    <outlet property="statePickerView" destination="n0g-mV-bDP" id="oYD-3h-j2n"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="filterCell" rowHeight="44" id="3nj-9N-muI" customClass="FilterTableViewCell" customModule="Eventor" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="228" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3nj-9N-muI" id="4Pe-G4-og1">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mAR-bq-B5G">
+                                            <rect key="frame" x="308" y="6" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="filterSwitchTapped:" destination="3nj-9N-muI" eventType="valueChanged" id="2SM-Jd-iiW"/>
+                                            </connections>
+                                        </switch>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="of2-7i-2En">
+                                            <rect key="frame" x="16" y="11" width="71" height="22"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="of2-7i-2En" firstAttribute="leading" secondItem="4Pe-G4-og1" secondAttribute="leadingMargin" id="3P1-EL-qjw"/>
+                                        <constraint firstItem="mAR-bq-B5G" firstAttribute="top" secondItem="4Pe-G4-og1" secondAttribute="top" constant="6" id="LQP-Nc-UWc"/>
+                                        <constraint firstAttribute="bottom" secondItem="mAR-bq-B5G" secondAttribute="bottom" constant="6.5" id="Ozf-Ur-fvm"/>
+                                        <constraint firstItem="of2-7i-2En" firstAttribute="top" secondItem="4Pe-G4-og1" secondAttribute="topMargin" id="Uhq-9P-Ec3"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="of2-7i-2En" secondAttribute="bottom" id="Vd8-jU-I4U"/>
+                                        <constraint firstAttribute="trailing" secondItem="mAR-bq-B5G" secondAttribute="trailing" constant="18" id="z80-bw-mSd"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="categoryLabel" destination="of2-7i-2En" id="5Zg-Zy-5iK"/>
+                                    <outlet property="filterSwitch" destination="mAR-bq-B5G" id="Cch-9W-GiC"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="9l9-dG-pTU" id="59m-tX-XMu"/>
+                            <outlet property="delegate" destination="9l9-dG-pTU" id="MFE-bO-oR4"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" title="" image="Slider" selectedImage="SliderFilled" id="law-ec-gqH"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="c9l-Ha-oHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="909"/>
+            <point key="canvasLocation" x="1076" y="944.97751124437787"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="LGa-sa-F2X">
@@ -275,7 +355,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="SnN-3k-Swl"/>
-                        <segue destination="7Hk-2Q-e6b" kind="relationship" relationship="viewControllers" id="QVg-wc-btE"/>
+                        <segue destination="9l9-dG-pTU" kind="relationship" relationship="viewControllers" id="wL2-mc-C9r"/>
                         <segue destination="xTT-bS-02k" kind="relationship" relationship="viewControllers" id="XAV-8H-EwA"/>
                     </connections>
                 </tabBarController>

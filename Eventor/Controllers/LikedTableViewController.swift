@@ -14,10 +14,6 @@ class LikedTableViewController: UITableViewController {
     //========================================
     //MARK: - Life Cycle Methods
     //========================================
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,8 +49,10 @@ class LikedTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            //Setting up convience variable
             let eventorController = EventorController.shared
             
+            //Removing current event from all necessary data areas
             Stack.context.delete(eventorController.getLikedEvents()[indexPath.row])
             EventorController.shared.removeLikedEvent(event: eventorController.getLikedEvents()[indexPath.row])
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -68,6 +66,7 @@ class LikedTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let destination = segue.destination as? DetailViewController, let selectedEventIndex = tableView.indexPathForSelectedRow?.row {
+            //Grabbing current selected event and setting detail views event
             let selectedEvent = EventorController.shared.getLikedEvents()[selectedEventIndex]
             destination.selectedEvent = selectedEvent
         }
