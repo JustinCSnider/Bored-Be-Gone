@@ -28,11 +28,13 @@ class FilterTableViewCell: UITableViewCell {
     //========================================
     
     @IBAction func filterSwitchTapped(_ sender: UISwitch) {
+        //Changing text color to show whether a filter is on or off
         if sender.isOn == false {
             categoryLabel.textColor = .lightGray
         } else {
             categoryLabel.textColor = .black
         }
+        //Used to set query up after changing filters
         delegate?.createQuery()
     }
     

@@ -262,6 +262,7 @@ class HomeViewController: UIViewController {
         //Grabbing Events from the API
         eventorController.grabEvents { (events) in
             guard let events = events else {
+                //If no events were pulled set all things up to inform user
                 DispatchQueue.main.async {
                     self.eventTitleLabel.text = "No more events available"
                     self.eventDescriptionLabel.text = "Change your filters if you want to see more"
@@ -273,6 +274,7 @@ class HomeViewController: UIViewController {
     
                 return
             }
+            //If events were pulled set up UI
             eventorController.setEvents(events: events)
             let nextEvent = eventorController.getNextEvent()!
             let date = dateFormatter.string(from: nextEvent.startTime)

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Justin Snider. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct FilterController {
     
@@ -88,6 +88,7 @@ struct FilterController {
             var results = [String]()
             
             if let categories = try? decoder.decode(Categories.self, from: data) {
+                //Setting results to category names
                 results = Array(categories.categories.keys)
             }
             

@@ -8,6 +8,7 @@
 
 import Foundation
 
+//Used to grab category names for filtersTableViewController
 struct Categories: Decodable {
     let categories: [String : Int]
 }

@@ -31,6 +31,7 @@ class EventorController {
     
     func grabEvents(completion: (([Event]?) -> Void)? = nil) {
         
+        //Changes the outcome of the network request based on whether their is a next url or not
         if currentURLString != nil {
             for i in searchQuery.keys {
                 if let searchQueryValue = searchQuery[i] {
@@ -58,10 +59,12 @@ class EventorController {
         NetworkController.performNetworkRequest(for: url, accessToken: "L3KQkKTpvMPFkoBaMhF1CcD5KCRiQ2") { (data, error) in
             guard let data = data else { return }
             
+            //Setting up variables for pulling events
             let decoder = JSONDecoder()
             let group = DispatchGroup()
             var results = [Event]()
             
+            //Used to get the start date of the events
             decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
             
             if let events = try? decoder.decode(Events.self, from: data) {
@@ -74,11 +77,13 @@ class EventorController {
 
                 var descriptEvents = events.results
                 
+                //Only puts events that have descriptions in the events array
                 for i in descriptEvents {
                     if i.eventDescription == "", let eventIndex = descriptEvents.firstIndex(of: i) {
                         descriptEvents.remove(at: eventIndex)
                         Stack.context.delete(i)
                     } else {
+                        //Grabs locations for the events
                         group.enter()
                         self.getAddressFromLatLon(withLatitude: i.latitude, andLongitude: i.longitude, completion: { (location) in
                             i.location = location
