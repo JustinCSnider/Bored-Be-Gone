@@ -41,7 +41,8 @@ class LikedTableViewController: UITableViewController {
         
         //Setting cell labels
         cell.textLabel?.text = currentLikedEvent.title
-        cell.detailTextLabel?.text = dateFormatter.string(from: currentLikedEvent.startTime)
+        cell.detailTextLabel?.numberOfLines = 0
+        cell.detailTextLabel?.text = "\(dateFormatter.string(from: currentLikedEvent.startTime))\n\(currentLikedEvent.location)"
 
         return cell
     }

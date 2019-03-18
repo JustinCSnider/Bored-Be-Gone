@@ -121,7 +121,9 @@ class FiltersTableViewController: UITableViewController, FilterSwitchDelegate {
         }
         
         //Removing extra comma at the end of the category string
-        query["category"]?.removeLast()
+        if query["category"]?.last == "," {
+            query["category"]?.removeLast()
+        }
         
         return query
     }
