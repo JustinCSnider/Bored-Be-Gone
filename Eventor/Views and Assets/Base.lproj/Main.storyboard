@@ -14,27 +14,27 @@
         <scene sceneID="pcL-og-23u">
             <objects>
                 <tableViewController id="Rnk-8W-YRz" customClass="LikedTableViewController" customModule="Eventor" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="y2J-ea-PD8">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="y2J-ea-PD8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="likedCellIdentifier" textLabel="apo-DT-maE" detailTextLabel="Qk4-25-41J" rowHeight="65" style="IBUITableViewCellStyleSubtitle" id="yll-Dp-7ig">
-                                <rect key="frame" x="0.0" y="28" width="375" height="65"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="likedCellIdentifier" textLabel="apo-DT-maE" detailTextLabel="Qk4-25-41J" rowHeight="85" style="IBUITableViewCellStyleSubtitle" id="yll-Dp-7ig">
+                                <rect key="frame" x="0.0" y="28" width="375" height="85"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yll-Dp-7ig" id="cll-6c-Oqa">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="84.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="apo-DT-maE">
-                                            <rect key="frame" x="16" y="12" width="33.5" height="20.5"/>
+                                            <rect key="frame" x="16" y="22" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qk4-25-41J">
-                                            <rect key="frame" x="16" y="35.5" width="44" height="14.5"/>
+                                            <rect key="frame" x="16" y="45.5" width="44" height="14.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
@@ -198,14 +198,38 @@
                                     <outletCollection property="gestureRecognizers" destination="Eo6-k3-doq" appends="YES" id="DUD-kN-X2J"/>
                                 </connections>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PredictHqLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Vwz-v6-ZgP">
+                                <rect key="frame" x="70" y="37.5" width="225" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="YFs-fQ-Teb"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sLd-9k-t7S">
+                                <rect key="frame" x="16" y="20" width="343" height="17.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Powered By">
+                                        <attributes>
+                                            <font key="NSFont" size="17" name="Copperplate"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="sLd-9k-t7S" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="DGl-bS-kUw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qBQ-9p-Pvb" secondAttribute="trailing" constant="67.5" id="Ggl-oU-fNt"/>
                             <constraint firstItem="qBQ-9p-Pvb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67.5" id="H38-sH-YfD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sLd-9k-t7S" secondAttribute="trailing" constant="16" id="Iif-Ff-uzh"/>
                             <constraint firstItem="qBQ-9p-Pvb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="McZ-3c-cSu"/>
                             <constraint firstItem="qBQ-9p-Pvb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Tyi-YQ-mSV"/>
+                            <constraint firstItem="Vwz-v6-ZgP" firstAttribute="top" secondItem="sLd-9k-t7S" secondAttribute="bottom" id="VOg-vP-qYF"/>
+                            <constraint firstItem="sLd-9k-t7S" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="ZJb-Dt-FUu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Vwz-v6-ZgP" secondAttribute="trailing" constant="80" id="aIi-mo-JD4"/>
+                            <constraint firstItem="Vwz-v6-ZgP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="70" id="hcD-WN-pt9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <connections>
@@ -388,6 +412,7 @@
         <image name="HeartFilled" width="18.75" height="18.75"/>
         <image name="Home" width="18.75" height="18.75"/>
         <image name="HomeFilled" width="18.75" height="18.75"/>
+        <image name="PredictHqLogo" width="225" height="159"/>
         <image name="Slider" width="18.75" height="18.75"/>
         <image name="SliderFilled" width="18.75" height="18.75"/>
         <image name="ThumbUp" width="75" height="75"/>

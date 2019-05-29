@@ -35,6 +35,7 @@ class FilterTableViewCell: UITableViewCell {
             categoryLabel.textColor = .black
         }
         //Used to set query up after changing filters
+        FilterController.shared.filterPageUsed = true
         delegate?.createQuery()
     }
     

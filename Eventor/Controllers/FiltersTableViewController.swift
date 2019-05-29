@@ -140,7 +140,7 @@ class FiltersTableViewController: UITableViewController, FilterSwitchDelegate {
                 EventorController.shared.setQuery(self.createQuery())
             }
             
-            //Setting up variables for logic based functionality
+            //Setting up variable for logic based functionality
             FilterController.shared.filterPageUsed = true
             EventorController.shared.resetCurrentEventIndex()
         }

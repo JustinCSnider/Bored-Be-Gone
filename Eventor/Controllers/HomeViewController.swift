@@ -269,22 +269,33 @@ class HomeViewController: UIViewController {
                     self.eventDescriptionLabel.alpha = 1.0
                     self.loadingActivityIndicator.alpha = 0.0
                     self.loadingActivityIndicator.stopAnimating()
+                    self.eventView.isUserInteractionEnabled = false
                 }
-                self.eventView.isUserInteractionEnabled = false
-    
                 return
             }
             //If events were pulled set up UI
             eventorController.setEvents(events: events)
-            let nextEvent = eventorController.getNextEvent()!
-            let date = dateFormatter.string(from: nextEvent.startTime)
-            DispatchQueue.main.async {
-                self.eventTitleLabel.text = nextEvent.title
-                self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(nextEvent.location) \n\n\(nextEvent.eventDescription)"
-                self.eventDescriptionLabel.alpha = 1.0
-                self.loadingActivityIndicator.alpha = 0.0
-                self.loadingActivityIndicator.stopAnimating()
-                self.eventView.isUserInteractionEnabled = true
+            if let nextEvent = eventorController.getNextEvent() {
+                let date = dateFormatter.string(from: nextEvent.startTime)
+                DispatchQueue.main.async {
+                    self.eventTitleLabel.text = nextEvent.title
+                    self.eventDescriptionLabel.text = "Date: \(date) \nLocation: \(nextEvent.location) \n\n\(nextEvent.eventDescription)"
+                    self.eventDescriptionLabel.alpha = 1.0
+                    self.loadingActivityIndicator.alpha = 0.0
+                    self.loadingActivityIndicator.stopAnimating()
+                    self.eventView.isUserInteractionEnabled = true
+                }
+            } else {
+                //If no events were pulled set all things up to inform user
+                DispatchQueue.main.async {
+                    self.eventTitleLabel.text = "No more events available"
+                    self.eventDescriptionLabel.text = "Change your filters if you want to see more"
+                    self.eventDescriptionLabel.alpha = 1.0
+                    self.loadingActivityIndicator.alpha = 0.0
+                    self.loadingActivityIndicator.stopAnimating()
+                    self.eventView.isUserInteractionEnabled = false
+                }
+                return
             }
         }
     }
